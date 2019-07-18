@@ -1,0 +1,139 @@
+<div>
+    <h3 style="text-align: center;">
+        <strong> {{title}} </strong>
+    </h3>
+</div>
+<hr/>
+
+<div>
+    <input
+        type="button"
+        value="Create"
+        [routerLink]="['../act-create/']"
+        class="btn btn-primary"
+    />
+</div>
+<hr/>
+
+<p-dataView 
+    #dv [value]="actList"
+    [loading]="loading" 
+    [paginator]="true" 
+    [rows]="12"
+    paginatorPosition="both"
+    filterBy="project"
+>
+    <p-header>
+        <div style="text-align: center">
+            <h3> Availables act </h3>
+        </div>
+        <div style="position:relative">
+            <input 
+                type="search" 
+                pInputText 
+                placeholder="Search by project" 
+                (keyup)="dv.filter($event.target.value)"
+            >
+        </div> 
+        <div style="text-align: right">
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+    </p-header>
+    <ng-template let-act pTemplate="listItem">
+        <div 
+            class="ui-8" 
+            style="padding: 2em; border-bottom: 1px solid #d9d9d9"
+        >
+            <div>
+                <strong> {{act.project}} </strong>
+            </div>
+            <div>
+                <button 
+                    (click)="saveDataIntoGeneralProvider('../act-show', act)" 
+                    class="btn btn-sm btn-primary"
+                >
+                    Show
+                </button>
+                <button
+                    (click)="saveDataIntoGeneralProvider('../act-edit', act)"
+                    class="btn btn-sm btn-warning"
+                >
+                    Edit
+                </button>
+                <button
+                    (click)="saveDataIntoGeneralProvider('../act-delete/'+
+                        act.actId)" 
+                    class="btn btn-sm btn-danger"
+                > 
+                    Delete
+                </button>
+            </div>
+            <div>
+                <button
+                    (click)="saveDataIntoGeneralProvider('../actparticipants', act)" 
+                    class="btn btn-sm btn-success"
+                >
+                    Add participants
+                </button>
+            </div>
+            <div>
+                <button 
+                    (click)="saveDataIntoGeneralProvider('../partfromact', act)"
+                    class="btn btn-sm btn-success"
+                >
+                    Add commitments
+                </button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-act pTemplate="gridItem">
+        <div 
+            class="ui-g-12 ui-md-3"
+            style="padding: 2em; 
+                border-bottom: 1px solid #d9d9d9; 
+                text-align: center"
+        >
+            <div>
+                <strong> {{act.project}} </strong>
+            </div>
+            <div>
+                <button 
+                    (click)="saveDataIntoGeneralProvider('../act-show', act)" 
+                    class="btn btn-sm btn-primary"
+                >
+                    Show
+                </button>
+                <button
+                    (click)="saveDataIntoGeneralProvider('../act-edit', act)"
+                    class="btn btn-sm btn-warning"
+                >
+                    Edit
+                </button>
+                <button
+                    (click)="saveDataIntoGeneralProvider('../act-delete/'+
+                        act.actId)" 
+                    class="btn btn-sm btn-danger"
+                > 
+                    Delete
+                </button>
+            </div>
+            <div>
+                <button
+                    (click)="saveDataIntoGeneralProvider('../actparticipants',
+                        act)" 
+                    class="btn btn-sm btn-success"
+                >
+                    Add participants
+                </button>
+            </div>
+            <div>
+                <button 
+                    (click)="saveDataIntoGeneralProvider('../partfromact', act)"
+                    class="btn btn-sm btn-success"
+                >
+                    Add commitments
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
