@@ -1,0 +1,124 @@
+<div>
+    <h3 style="text-align: center;">
+        <strong> {{title}} </strong>
+    </h3>
+</div>
+<hr/>
+<div>
+    <input
+        type="button"
+        value="Create"
+        [routerLink]="['../participant-create/']"
+        class="btn btn-primary"
+    />
+</div>
+<hr/>
+
+<p-dataView 
+    #dv [value]="participantList"
+    [loading]="loading" 
+    [paginator]="true" 
+    [rows]="12"
+    paginatorPosition="both"
+    filterBy="name"
+>
+    <p-header>
+        <div style="text-align: center">
+            <h3> Availables participants </h3>
+        </div>
+        <div style="position:relative">
+            <input 
+                type="search" 
+                pInputText 
+                placeholder="Search by participant" 
+                (keyup)="dv.filter($event.target.value)"
+            >
+        </div> 
+        <div style="text-align: right">
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+    </p-header>
+    <ng-template let-part pTemplate="listItem">
+        <div 
+            class="ui-8" 
+            style="padding: 2em; border-bottom: 1px solid #d9d9d9"
+        >
+            <div>
+                <strong> {{part.name}} </strong>
+            </div>
+            <div>
+                <button
+                    (click)="saveDataIntoGeneralProvider('participant-show/', part)"
+                    class="btn btn-sm btn-primary"
+                > 
+                    Show
+                </button>
+    
+                <button 
+                    (click)="saveDataIntoGeneralProvider('participant-edit/', part)"
+                    class="btn btn-sm btn-warning"
+                >
+                    Edit
+                </button>
+                <button 
+                    (click)="saveDataIntoGeneralProvider(
+                        'participant-delete/'+part.participant_id, part)"
+                    class="btn btn-sm btn-warning"
+                >
+                    Delete
+                </button>
+            </div>
+            <div>
+                    <button
+                        (click)="saveDataIntoGeneralProvider('partcommitments/',part)"
+                        class="btn btn-sm btn-success"
+                    >
+                        See commitments
+                    </button>
+            </div>            
+        </div>
+    </ng-template>
+    <ng-template let-part pTemplate="gridItem">
+        <div 
+            class="ui-g-12 ui-md-3"
+            style="padding: 2em; 
+                border-bottom: 1px solid #d9d9d9; 
+                text-align: center"
+        >
+            <div>
+                <strong> {{part.name}} </strong>
+            </div>
+            <div>
+                <button
+                    (click)="saveDataIntoGeneralProvider('participant-show/', part)"
+                    class="btn btn-sm btn-primary"
+                > 
+                    Show
+                </button>
+
+                <button 
+                    (click)="saveDataIntoGeneralProvider('participant-edit/', part)"
+                    class="btn btn-sm btn-warning"
+                >
+                    Edit
+                </button>
+
+                <button 
+                    (click)="saveDataIntoGeneralProvider(
+                        'participant-delete/'+part.participant_id, part)"
+                    class="btn btn-sm btn-warning"
+                >
+                    Delete
+                </button>
+            </div>
+            <div>
+                <button
+                    (click)="saveDataIntoGeneralProvider('partcommitments/',part)"
+                    class="btn btn-sm btn-success"
+                >
+                    See commitments
+                </button>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>

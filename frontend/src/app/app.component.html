@@ -1,0 +1,43 @@
+<div id="content">
+  
+  <header id="header" class="col-lg-12">
+    <h1>
+      {{title}}
+    </h1>
+  </header>
+
+  <nav id="navigationbar" >
+    <ul>
+      <li>
+        <a 
+          [routerLink]="['act-list']" 
+          [routerLinkActive]="'selectedtab'"
+        >
+          Act management
+        </a>
+      </li>
+
+      <li>
+        <a 
+          [routerLink]="['participant-list']"
+          [routerLinkActive]="'selectedtab'"
+        >
+          Participants management
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="middle-display">
+    <section id="main">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+
+  <footer id="footer" class="col-lg-12">
+    <p>
+      Act management project
+    </p>
+  </footer>
+
+</div>

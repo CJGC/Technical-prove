@@ -1,0 +1,18 @@
+<div>
+    <p>Do you want to delete this act?</p>
+</div>
+<div>
+    <input
+        value="Yes"
+        type="button" 
+        (click)="delAct()" 
+        class="btn btn-danger"
+    >
+
+    <input
+        value="No"
+        type="button"
+        [routerLink]="['../../act-list/']"
+        class="btn btn-primary"
+    >
+</div>
