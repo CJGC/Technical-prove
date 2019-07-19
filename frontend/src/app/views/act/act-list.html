@@ -1,4 +1,8 @@
 <div>
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+</div>
+
+<div>
     <h3 style="text-align: center;">
         <strong> {{title}} </strong>
     </h3>
@@ -9,7 +13,7 @@
     <input
         type="button"
         value="Create"
-        [routerLink]="['../act-create/']"
+        (click)="openCreateDialog()"
         class="btn btn-primary"
     />
 </div>
