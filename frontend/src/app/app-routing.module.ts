@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 // components
 import { ActListComponent } from './components/act/act-list.component';
-import { ActCreateComponent } from './components/act/act-create.component';
 import { ActShowComponent } from './components/act/act-show.component';
 import { MissinWebPageComponent } from './components/errors/missing-webpage.component';
 import { AppComponent } from './app.component';
@@ -24,7 +23,6 @@ import { CommitmentDeleteComponent } from './components/commitment/commitment-de
 
 const routes: Routes = [
   {path: 'act-list', component: ActListComponent},
-  {path: 'act-create', component : ActCreateComponent },
   {path: 'act-show', component : ActShowComponent },
   {path: 'act-edit', component : ActEditComponent},
   {path: 'act-delete/:id', component : ActDeleteComponent},
