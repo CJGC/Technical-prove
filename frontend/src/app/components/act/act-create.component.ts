@@ -1,31 +1,60 @@
-import { Component } from '@angular/core';
-import { ActService } from 'src/app/services/act.service';
+import { Component, OnInit } from '@angular/core';
+import { DynamicDialogRef, MessageService } from 'primeng/api';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Act } from 'src/app/models/act';
-import { Router } from '@angular/router';
+import { ActService } from 'src/app/services/act.service';
 
-@Component ({
-    selector : 'act-create',
-    templateUrl : '../../views/act/act-create.html',
-    providers : [ActService]
+@Component({
+  selector: 'create-act',
+  templateUrl: '../../views/act/act-create.html',
+  providers : [ActService]
 })
-export class ActCreateComponent {
+export class CreateActComponent implements OnInit {
 
-    private title : string;
-    private act : Act;
-
-    constructor (
-        private actService : ActService,
-        private _router : Router
+  public actForm : FormGroup;
+  
+  constructor(
+      private dynamicDialogRef : DynamicDialogRef,
+      private messageService : MessageService,
+      private formBuilder : FormBuilder,
+      private actService : ActService,
     ) 
-    {
-        this.title = "Creating an act";
-        this.act = new Act(0,"","","",null,null);
-    }
+    { }
 
-    createActa() : void {
-        this.actService.creatAct(this.act).subscribe (
-            response => this._router.navigate(["/act-list"]),
-            error => console.log("Error saving act!", error)
-        );
-    }
+  ngOnInit() {
+    
+    // defining formulary default data and validations rules
+    this.actForm = this.formBuilder.group({
+        location : ['', [Validators.required]],
+        project : ['', [Validators.required]],
+        content : ['', [Validators.required]],
+        date : ['', [Validators.required]],
+        nextMeetingDate : ['', [Validators.required]]
+    });
+  }
+
+  public createAct() {
+    let act = <Act> this.actForm.value;
+    
+    this.actService.creatAct(act).subscribe(
+      response => {
+          this.dynamicDialogRef.close();
+          this.messageService.add({
+              severity : 'success',
+              summary : 'Infor',
+              detail : 'Act was created successfully'
+          });
+      },
+      error => console.log("Error creating act: ", error)
+    );
+  }
+
+  public cancel() {
+    this.dynamicDialogRef.close();
+    this.messageService.add({
+      severity : 'info',
+      summary : 'Info',
+      detail : 'The act creation was cancelled'
+    });
+  }
 }
