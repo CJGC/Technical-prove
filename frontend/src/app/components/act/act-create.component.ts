@@ -25,11 +25,12 @@ export class CreateActComponent implements OnInit {
     
     // defining formulary default data and validations rules
     this.actForm = this.formBuilder.group({
+        actId : ['', []],
         location : ['', [Validators.required]],
         project : ['', [Validators.required]],
         content : ['', [Validators.required]],
         date : ['', [Validators.required]],
-        nextMeetingDate : ['', [Validators.required]]
+        nextMeetingDate : ['', []]
     });
   }
 
@@ -38,7 +39,7 @@ export class CreateActComponent implements OnInit {
     
     this.actService.creatAct(act).subscribe(
       response => {
-          this.dynamicDialogRef.close();
+          this.dynamicDialogRef.close(act);
           this.messageService.add({
               severity : 'success',
               summary : 'Infor',
