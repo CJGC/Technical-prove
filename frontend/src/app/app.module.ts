@@ -74,7 +74,10 @@ import {ToastModule} from 'primeng/toast';
     CalendarModule,
     DynamicDialogModule
   ],
-  entryComponents : [CreateActComponent],
+  entryComponents : [
+    CreateActComponent, 
+    ActEditComponent
+  ],
   providers: [GeneralProvider, DialogService, MessageService],
   bootstrap: [AppComponent]
 })
