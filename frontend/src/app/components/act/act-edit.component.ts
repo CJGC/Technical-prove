@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Act } from 'src/app/models/act';
-import { Router } from '@angular/router';
-import { GeneralProvider } from 'src/app/providers/general.provider';
 import { ActService } from 'src/app/services/act.service';
+import { DynamicDialogRef, MessageService, DynamicDialogConfig } from 'primeng/api';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector : 'act-edit',
@@ -12,25 +12,55 @@ import { ActService } from 'src/app/services/act.service';
 export class ActEditComponent {
     private title : string;
     private act : Act;
+    public actForm : FormGroup;
 
     constructor(
-        private actService : ActService,
-        private _route : Router,
-        private generalProvider : GeneralProvider
+        private dynamicDialogRef : DynamicDialogRef,
+        private dynamicDialogConfig : DynamicDialogConfig,
+        private messageService : MessageService,
+        private formBuilder : FormBuilder,
+        private actService : ActService
     )
     {
         this.title = "Edit act";
     }
 
     ngOnInit() {
-        this.act = <Act> this.generalProvider.getData().pop();
+        this.act = this.dynamicDialogConfig.data.act;
+        
+        // defining formulary default data and validations rules
+        this.actForm = this.formBuilder.group({
+            actId : [this.act.actId, []],
+            location : [this.act.location, [Validators.required]],
+            project : [this.act.project, [Validators.required]],
+            content : [this.act.content, [Validators.required]],
+            date : [new Date(this.act.date), [Validators.required]],
+            nextMeetingDate : [new Date(this.act.nextMeetingDate), []]
+        });
     }
 
-    editAct() : void {
+    public editAct() : void {
+        this.act = this.actForm.value;
         this.actService.editAct(this.act).subscribe (
-            result => this._route.navigate(['/act-list']),
+            response => {
+                this.dynamicDialogRef.close(this.act);
+                this.messageService.add({
+                    severity : 'success',
+                    summary : 'Infor',
+                    detail : 'Act was edited successfully'
+                });
+            },
             error => console.log("Error upgrading act.", error)
         );
+    }
+
+    public cancel() : void {
+        this.dynamicDialogRef.close();
+        this.messageService.add({
+            severity : 'info',
+            summary : 'Info',
+            detail : 'The act edition was cancelled'
+        });
     }
 
 }
