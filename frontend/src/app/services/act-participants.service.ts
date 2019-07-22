@@ -25,7 +25,11 @@ export class actParticipantsService {
         : any 
     {
         return this._http.post(this.url + 
-            "/addactparticipants", actParticipants);
+            "/addactparticipants", actParticipants).
+            subscribe(
+                data => console.log("ActPart were associated succesfully"),
+                error => console.log("Error adding participants", error)
+            );
     }
 
     public deleteActParticipants(actParticipants : Array<ActParticipants>) {
