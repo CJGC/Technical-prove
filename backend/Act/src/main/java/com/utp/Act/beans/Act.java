@@ -17,9 +17,9 @@ public class Act implements Serializable {
     private String location;
     private String project;
     private String content;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date actDate;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date nextMeetingDate;
 
     public Act(Integer actId, String project, String content, Date date, 

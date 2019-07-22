@@ -32,11 +32,13 @@ public class ActController {
 
     @PostMapping(value="/addact")
     public void addAct(@RequestBody Act act) {
+        System.out.println("Object's content: " + act.getDate());
         actService.addAct(act);
     }
 
     @PutMapping(value="/updact")
-    public void updateAct(@RequestBody Act act) {        
+    public void updateAct(@RequestBody Act act) {
+        System.out.println("Object's content: " + act.getDate());
         actService.updateAct(act);
     }
 
