@@ -6,8 +6,6 @@ import { ActListComponent } from './components/act/act-list.component';
 import { ActShowComponent } from './components/act/act-show.component';
 import { MissinWebPageComponent } from './components/errors/missing-webpage.component';
 import { AppComponent } from './app.component';
-import { ActEditComponent } from './components/act/act-edit.component';
-import { ActDeleteComponent } from './components/act/act-delete.component';
 import { ParticipantListComponent } from './components/participant/participant-list.component';
 import { ParticipantCreateComponent } from './components/participant/participant-create.component';
 import { ParticipantShowComponent } from './components/participant/participant-show.component';
@@ -24,7 +22,6 @@ import { CommitmentDeleteComponent } from './components/commitment/commitment-de
 const routes: Routes = [
   {path: 'act-list', component: ActListComponent},
   {path: 'act-show', component : ActShowComponent },
-  {path: 'act-delete/:id', component : ActDeleteComponent},
 
   {path: 'participant-list', component: ParticipantListComponent},
   {path: 'participant-create', component : ParticipantCreateComponent },
