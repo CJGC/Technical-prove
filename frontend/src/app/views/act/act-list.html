@@ -65,8 +65,7 @@
                     Edit
                 </button>
                 <button
-                    (click)="saveDataIntoGeneralProvider('../act-delete/'+
-                        act.actId)" 
+                    (click)="openDialog(act, 'delete')" 
                     class="btn btn-sm btn-danger"
                 > 
                     Delete
@@ -108,14 +107,13 @@
                     Show
                 </button>
                 <button
-                    (click)="openEditDialog(act)"
+                    (click)="openDialog(act, 'edit')"
                     class="btn btn-sm btn-warning"
                 >
                     Edit
                 </button>
                 <button
-                    (click)="saveDataIntoGeneralProvider('../act-delete/'+
-                        act.actId)" 
+                    (click)="openDialog(act, 'delete')" 
                     class="btn btn-sm btn-danger"
                 > 
                     Delete
