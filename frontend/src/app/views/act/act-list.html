@@ -13,7 +13,7 @@
     <input
         type="button"
         value="Create"
-        (click)="openCreateDialog()"
+        (click)="openDialog(null,'create')"
         class="btn btn-primary"
     />
 </div>
@@ -59,7 +59,7 @@
                     Show
                 </button>
                 <button
-                    (click)="openEditDialog(act)"
+                    (click)="openDialog(act, 'edit')"
                     class="btn btn-sm btn-warning"
                 >
                     Edit
