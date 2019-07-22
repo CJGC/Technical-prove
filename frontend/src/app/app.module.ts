@@ -76,9 +76,14 @@ import {ToastModule} from 'primeng/toast';
   ],
   entryComponents : [
     CreateActComponent, 
-    ActEditComponent
+    ActEditComponent,
+    ActDeleteComponent
   ],
-  providers: [GeneralProvider, DialogService, MessageService],
+  providers: [
+    GeneralProvider, 
+    DialogService, 
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
