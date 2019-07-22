@@ -5,6 +5,7 @@ import { GeneralProvider } from 'src/app/providers/general.provider';
 import { Router } from '@angular/router';
 import { DialogService } from 'primeng/api';
 import { CreateActComponent } from './act-create.component';
+import { ActEditComponent } from './act-edit.component';
 
 @Component ({
     selector : 'act-list',
@@ -35,20 +36,47 @@ export class ActListComponent {
         );
     }
 
-    public openCreateDialog() {
+    public openDialog(act : Act, tc : string) {
+        let targetComponent : any;
+        if (tc == "create")
+            targetComponent = CreateActComponent;
+        else if (tc == "edit")
+            targetComponent = ActEditComponent;
+        else 
+            targetComponent = null;
+
         let dialog = this.dialogService.open(
-            CreateActComponent,
+            targetComponent,
             {
-                header : 'Creating act',
-                width : '60%' 
+                header : tc + ' act',
+                width : '60%',
+                data : {act : act}
             }
-        )
+        );
 
         dialog.onClose.subscribe( 
-            response => this.getAct(),
+            response => {if (response != null) this.getAct()},
             error => console.log("Error closing dialog", error)
         );
     }
+
+    /*
+    public openEditDialog(act : Act) {
+        let dialog = this.dialogService.open(
+            ActEditComponent,
+            {
+                header : 'Editing act',
+                width : '60%',
+                data : {act : act}
+            }
+        );
+
+        dialog.onClose.subscribe(
+            response => {if (response != null) this.getAct()},
+            error => console.log("Error closing dialog", error)
+        );
+    }
+    */
 
     public saveDataIntoGeneralProvider(url : string, act : Act) : void {
         this.generalProvider.clearData();
