@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { ActService } from 'src/app/services/act.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { DynamicDialogRef, DynamicDialogConfig, MessageService } from 'primeng/api';
+import { Act } from 'src/app/models/act';
 
 @Component({
     selector : 'act-del',
@@ -9,21 +10,38 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ActDeleteComponent {
 
+    public act : Act;
+
     constructor (
-        private actService : ActService,
-        private activatedRoute : ActivatedRoute,
-        private _router : Router
-    ) { }
+        private dynamicDialogRef : DynamicDialogRef,
+        private dynamicDialogConfig : DynamicDialogConfig,
+        private messageService : MessageService,
+        private actService : ActService
+    ) { 
+        this.act = this.dynamicDialogConfig.data.act;
+    }
 
-    delAct() : void {
-        let id : number;
-        this.activatedRoute.params.subscribe (
-            params =>  id = parseInt(params['id'],10)
-        );
-
-        this.actService.delAct(id).subscribe (
-            response => this._router.navigate(["/act-list"]),
-            error =>  console.log("Error deleting act", error)
+    public delAct() : void {
+        this.actService.delAct(this.act.actId).subscribe(
+            response => {
+                this.dynamicDialogRef.close(this.act);
+                this.messageService.add({
+                    severity : 'success',
+                    summary : 'Info',
+                    detail : 'Act was deleted successfully'
+                })
+            },
+            error => console.log("Error deleting act: ", error)
         );
     }
+
+    public cancel() {
+        this.dynamicDialogRef.close();
+        this.messageService.add({
+            severity : 'info',
+            summary : 'Info',
+            detail : 'Act was not deleted'
+        });
+    }
+
 }
