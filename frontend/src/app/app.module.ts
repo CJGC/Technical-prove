@@ -24,13 +24,14 @@ import { ParticipantCommitmentsComponent } from './components/commitment/partici
 import { CommitmentShowComponent } from './components/commitment/commitment-show.component';
 import { CommitmentEditComponent } from './components/commitment/component-edit.component';
 import { CommitmentDeleteComponent } from './components/commitment/commitment-delete.component';
-import {CalendarModule} from 'primeng/calendar';
 
 import { DialogService, MessageService } from 'primeng/api';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { CreateActComponent } from './components/act/act-create.component';
 
 import { PickListModule } from 'primeng/picklist';
+import { CalendarModule } from 'primeng/calendar';
+import { TableModule } from 'primeng/table';
 import { DataViewModule } from 'primeng/dataview';
 import { ToastModule } from 'primeng/toast';
 
@@ -72,7 +73,8 @@ import { ToastModule } from 'primeng/toast';
     FormsModule,
     ReactiveFormsModule,
     CalendarModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    TableModule
   ],
   entryComponents : [
     CreateActComponent, 
