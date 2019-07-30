@@ -21,7 +21,7 @@ import { CommitmentDeleteComponent } from './components/commitment/commitment-de
 
 const routes: Routes = [
   {path: 'act-list', component: ActListComponent},
-  {path: 'act-show', component : ActShowComponent },
+  {path: 'act-show/:id', component : ActShowComponent },
 
   {path: 'participant-list', component: ParticipantListComponent},
   {path: 'participant-create', component : ParticipantCreateComponent },
