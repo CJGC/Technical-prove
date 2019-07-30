@@ -61,24 +61,6 @@ export class ActListComponent {
         );
     }
 
-    /*
-    public openEditDialog(act : Act) {
-        let dialog = this.dialogService.open(
-            ActEditComponent,
-            {
-                header : 'Editing act',
-                width : '60%',
-                data : {act : act}
-            }
-        );
-
-        dialog.onClose.subscribe(
-            response => {if (response != null) this.getAct()},
-            error => console.log("Error closing dialog", error)
-        );
-    }
-    */
-
     public saveDataIntoGeneralProvider(url : string, act : Act) : void {
         this.generalProvider.clearData();
         this.generalProvider.setData([act]);
