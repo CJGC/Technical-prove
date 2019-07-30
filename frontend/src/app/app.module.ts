@@ -27,12 +27,12 @@ import { CommitmentDeleteComponent } from './components/commitment/commitment-de
 import {CalendarModule} from 'primeng/calendar';
 
 import { DialogService, MessageService } from 'primeng/api';
-import { DynamicDialogModule } from 'primeng/components/dynamicdialog/dynamicdialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { CreateActComponent } from './components/act/act-create.component';
 
 import { PickListModule } from 'primeng/picklist';
 import { DataViewModule } from 'primeng/dataview';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
