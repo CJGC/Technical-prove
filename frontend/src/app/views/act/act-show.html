@@ -11,28 +11,55 @@
         type="button"
         value="Back"
         class="btn btn-primary btn-bg"
-        [routerLink]="['../act-list']"
+        [routerLink]="['../../act-list']"
     /> 
 </div>
 
-<div *ngIf="act; then proceed else wait"></div>
+<p-table [value]="act">
+    <ng-template pTemplate="header">
+        <tr>
+            <th 
+                colspan="2"
+                style="text-align: center;"
+            > 
+                Act info 
+            </th>
+        </tr>
+        <tr>
+            <th style="text-align: center;"> 
+                Description 
+            </th>
+            <th style="text-align: center;"> 
+                Data 
+            </th>
+        </tr>
+    </ng-template>
 
-<ng-template #proceed>
-    <div id="act-show-view">
-        <ul>
-            <li> <strong> Acta id: </strong> {{ act.actId }} </li>
-            <li> <strong> Meeting Date: </strong> {{ act.date }} </li>
-            <li> 
-                <strong> Next meeting date: </strong> 
-                {{ act.nextMeetingDate }} 
-            </li>
-            <li> <strong> Location: </strong> {{ act.location }} </li>
-            <li> <strong> Project: </strong> {{ act.project }} </li>
-            <li> <strong> Content: </strong> {{ act.content }} </li>
-        </ul>
-    </div>
-</ng-template>
+    <ng-template pTemplate="body" let-a>
+        <tr> 
+            <td> <strong> Date: </strong> </td> 
+            <td> {{a.date}} </td> 
+        </tr>
 
-<ng-template #wait >
-    <p> loading ... </p>
-</ng-template>
+        <tr> 
+            <td> <strong> Next meeting date: </strong> </td>
+            <td> {{a.nextMeetingDate}} </td> 
+        </tr>
+
+        <tr>
+            <td> <strong> Project name: </strong> </td>
+            <td> {{a.project}} </td>
+        </tr>
+
+        <tr> 
+            <td> <strong> Location: </strong> </td>
+            <td> {{a.location}} </td> 
+        </tr>
+        
+        <tr>
+            <td> <strong> Content: </strong> </td>
+            <td> {{a.content}} </td> 
+        </tr>
+
+    </ng-template>
+</p-table>
