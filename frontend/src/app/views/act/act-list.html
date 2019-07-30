@@ -23,15 +23,15 @@
     #dv [value]="actList"
     [loading]="loading" 
     [paginator]="true" 
-    [rows]="12"
+    [rows]="16"
     paginatorPosition="both"
     filterBy="project"
 >
     <p-header>
-        <div style="text-align: center">
+        <div style="text-align: center;">
             <h3> Availables act </h3>
         </div>
-        <div style="position:relative">
+        <div style="position:relative;">
             <input 
                 type="search" 
                 pInputText 
@@ -39,101 +39,68 @@
                 (keyup)="dv.filter($event.target.value)"
             >
         </div> 
-        <div style="text-align: right">
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </div>
     </p-header>
     <ng-template let-act pTemplate="listItem">
         <div 
             class="ui-8" 
-            style="padding: 2em; border-bottom: 1px solid #d9d9d9"
+            style="
+                padding: 2em;
+                border-bottom: 2px solid #d9d9d9; 
+                text-align: center;"
         >
             <div>
-                <strong> {{act.project}} </strong>
+                <h3>
+                    <strong> 
+                        <a
+                            [routerLink]="['../act-show/', act.actId]"
+                        >
+                            {{act.project}} 
+                        </a>
+                    </strong>
+                </h3>
             </div>
             <div>
-                <button 
-                    (click)="saveDataIntoGeneralProvider('../act-show', act)" 
-                    class="btn btn-sm btn-primary"
-                >
-                    Show
-                </button>
                 <button
+                    pButton
+                    type="button"
+                    label="Edit"
                     (click)="openDialog(act, 'edit')"
-                    class="btn btn-sm btn-warning"
+                    class="ui-button-rounded ui-button-warning"
                 >
-                    Edit
                 </button>
                 <button
-                    (click)="openDialog(act, 'delete')" 
-                    class="btn btn-sm btn-danger"
+                    pButton
+                    type="button"
+                    label="Delete"
+                    (click)="openDialog(act, 'delete')"
+                    style="margin-left: 1%"
+                    class="ui-button-rounded ui-button-danger"
                 > 
-                    Delete
                 </button>
             </div>
             <div>
                 <button
-                    (click)="saveDataIntoGeneralProvider('../actparticipants', act)" 
-                    class="btn btn-sm btn-success"
+                    pButton
+                    type="button"
+                    label="Add participants"
+                    (click)="saveDataIntoGeneralProvider(
+                        '../actparticipants', act)"
+                    style="margin-top: 1%"
+                    class="ui-button-success"
                 >
-                    Add participants
                 </button>
             </div>
             <div>
                 <button 
-                    (click)="saveDataIntoGeneralProvider('../partfromact', act)"
-                    class="btn btn-sm btn-success"
+                    pButton
+                    type="button"
+                    label="Add commitments"
+                    (click)="saveDataIntoGeneralProvider(
+                        '../partfromact', act)"
+                    style="margin-top: 1%"
+                    class="ui-button-success"
                 >
-                    Add commitments
-                </button>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template let-act pTemplate="gridItem">
-        <div 
-            class="ui-g-12 ui-md-3"
-            style="padding: 2em; 
-                border-bottom: 1px solid #d9d9d9; 
-                text-align: center"
-        >
-            <div>
-                <strong> {{act.project}} </strong>
-            </div>
-            <div>
-                <button 
-                    (click)="saveDataIntoGeneralProvider('../act-show', act)" 
-                    class="btn btn-sm btn-primary"
-                >
-                    Show
-                </button>
-                <button
-                    (click)="openDialog(act, 'edit')"
-                    class="btn btn-sm btn-warning"
-                >
-                    Edit
-                </button>
-                <button
-                    (click)="openDialog(act, 'delete')" 
-                    class="btn btn-sm btn-danger"
-                > 
-                    Delete
-                </button>
-            </div>
-            <div>
-                <button
-                    (click)="saveDataIntoGeneralProvider('../actparticipants',
-                        act)" 
-                    class="btn btn-sm btn-success"
-                >
-                    Add participants
-                </button>
-            </div>
-            <div>
-                <button 
-                    (click)="saveDataIntoGeneralProvider('../partfromact', act)"
-                    class="btn btn-sm btn-success"
-                >
-                    Add commitments
+                    
                 </button>
             </div>
         </div>
