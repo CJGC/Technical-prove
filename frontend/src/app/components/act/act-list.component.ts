@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DialogService } from 'primeng/api';
 import { CreateActComponent } from './act-create.component';
 import { ActEditComponent } from './act-edit.component';
+import { ActDeleteComponent } from './act-delete.component';
 
 @Component ({
     selector : 'act-list',
@@ -43,7 +44,7 @@ export class ActListComponent {
         else if (tc == "edit")
             targetComponent = ActEditComponent;
         else 
-            targetComponent = null;
+            targetComponent = ActDeleteComponent;
 
         let dialog = this.dialogService.open(
             targetComponent,
