@@ -1,21 +1,42 @@
-import { Component, SystemJsNgModuleLoader } from '@angular/core';
+import { Component, SystemJsNgModuleLoader, OnInit } from '@angular/core';
 import { Act } from 'src/app/models/act';
-import { GeneralProvider } from 'src/app/providers/general.provider';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ActService } from 'src/app/services/act.service';
 
 @Component ({
     selector : 'act-show',
     templateUrl : '../../views/act/act-show.html',
-    providers : []
+    providers : [ActService]
 })
-export class ActShowComponent {
+export class ActShowComponent implements OnInit {
     private title : string;
-    private act : Act;
+    public act : Array<Act>;
 
     constructor (
-        private generalProvider : GeneralProvider
+        private _router : Router,
+        private activatedRouter : ActivatedRoute,
+        private actService : ActService
     ) {
         this.title = "Act details";
-        this.act = <Act> this.generalProvider.getData()[0];
+        this.act = new Array<Act>();
+    }
+
+    ngOnInit() {
+        this.getAct();
+    }
+
+    public getAct() {
+        this.activatedRouter.paramMap.subscribe ( param => {
+            const act_id = +param.get("id");
+            if (act_id == null) {
+                console.log("Incorrect argument's name");
+                return
+            }
+            this.actService.getAct(act_id).subscribe (
+                res => this.act.push(res),
+                error => console.log("Error getting act: ", error)
+            );
+        });
     }
 
 }
