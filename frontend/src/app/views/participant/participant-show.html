@@ -11,30 +11,45 @@
         type="button"
         value="Back"
         class="btn btn-primary btn-bg"
-        [routerLink]="['../participant-list']"
+        [routerLink]="['../../participant-list']"
     /> 
 </div>
 
-<div *ngIf="participant; then proceed else wait"></div>
+<p-table [value]="participant">
+    <ng-template pTemplate="header">
+        <tr>
+            <th 
+                colspan="2"
+                style="text-align: center;"
+            > 
+                Participant info 
+            </th>
+        </tr>
+        <tr>
+            <th style="text-align: center;"> 
+                Description 
+            </th>
+            <th style="text-align: center;"> 
+                Data 
+            </th>
+        </tr>
+    </ng-template>
 
-<ng-template #proceed>
-    <div id="participant-show-view">
-        <ul>
-            <li> <strong> Participant id: </strong> 
-                {{ participant.participant_id }} </li>
-            <li> <strong> Participant's name: </strong> 
-                {{ participant.name }} </li>
-            <li> 
-                <strong> Participant's surname: </strong> 
-                {{ participant.surname }} 
-            </li>
-            <li> <strong> Participant's Email: </strong> 
-                {{ participant.email }} 
-            </li>
-        </ul>
-    </div>
-</ng-template>
+    <ng-template pTemplate="body" let-p>
+        <tr> 
+            <td> <strong> Participant's name: </strong> </td> 
+            <td> {{p.name}} </td> 
+        </tr>
 
-<ng-template #wait >
-    <p> loading ... </p>
-</ng-template>
+        <tr> 
+            <td> <strong> Participant's surname: </strong> </td>
+            <td> {{p.surname}} </td> 
+        </tr>
+
+        <tr>
+            <td> <strong> Participant's email: </strong> </td>
+            <td> {{p.email}} </td>
+        </tr>
+
+    </ng-template>
+</p-table>
