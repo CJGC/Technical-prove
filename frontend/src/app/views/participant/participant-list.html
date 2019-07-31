@@ -1,4 +1,8 @@
 <div>
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+</div>
+
+<div>
     <h3 style="text-align: center;">
         <strong> {{title}} </strong>
     </h3>
@@ -18,7 +22,7 @@
     #dv [value]="participantList"
     [loading]="loading" 
     [paginator]="true" 
-    [rows]="12"
+    [rows]="16"
     paginatorPosition="both"
     filterBy="name"
 >
@@ -34,89 +38,59 @@
                 (keyup)="dv.filter($event.target.value)"
             >
         </div> 
-        <div style="text-align: right">
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </div>
     </p-header>
     <ng-template let-part pTemplate="listItem">
         <div 
             class="ui-8" 
-            style="padding: 2em; border-bottom: 1px solid #d9d9d9"
+            style="
+                padding: 2em; 
+                border-bottom: 1px solid #d9d9d9;
+                text-align: center;
+            "
         >
             <div>
-                <strong> {{part.name}} </strong>
+                <h3>
+                    <strong> 
+                        <a
+                            [routerLink]="['../participant-show/', 
+                                part.participant_id]"
+                        >
+                            {{part.name}}
+                        </a>
+                    </strong>
+                </h3>
             </div>
             <div>
                 <button
-                    (click)="saveDataIntoGeneralProvider('participant-show/', part)"
-                    class="btn btn-sm btn-primary"
-                > 
-                    Show
-                </button>
-    
-                <button 
-                    (click)="saveDataIntoGeneralProvider('participant-edit/', part)"
-                    class="btn btn-sm btn-warning"
+                    pButton
+                    type="button"
+                    label="Edit"
+                    (click)="saveDataIntoGeneralProvider(
+                        'participant-edit/', part)"
+                    class="ui-button-rounded ui-button-warning"
                 >
-                    Edit
                 </button>
                 <button 
+                    style="margin-left:1%"
+                    pButton
+                    type="button"
+                    label="Delete"
                     (click)="saveDataIntoGeneralProvider(
                         'participant-delete/'+part.participant_id, part)"
-                    class="btn btn-sm btn-warning"
+                    class="ui-button-rounded ui-button-danger"
                 >
-                    Delete
                 </button>
-            </div>
-            <div>
-                    <button
-                        (click)="saveDataIntoGeneralProvider('partcommitments/',part)"
-                        class="btn btn-sm btn-success"
-                    >
-                        See commitments
-                    </button>
-            </div>            
-        </div>
-    </ng-template>
-    <ng-template let-part pTemplate="gridItem">
-        <div 
-            class="ui-g-12 ui-md-3"
-            style="padding: 2em; 
-                border-bottom: 1px solid #d9d9d9; 
-                text-align: center"
-        >
-            <div>
-                <strong> {{part.name}} </strong>
             </div>
             <div>
                 <button
-                    (click)="saveDataIntoGeneralProvider('participant-show/', part)"
-                    class="btn btn-sm btn-primary"
-                > 
-                    Show
-                </button>
-
-                <button 
-                    (click)="saveDataIntoGeneralProvider('participant-edit/', part)"
-                    class="btn btn-sm btn-warning"
-                >
-                    Edit
-                </button>
-
-                <button 
+                    style="margin-top: 1%"
+                    pButton
+                    type="button"
+                    label="See commitments"
                     (click)="saveDataIntoGeneralProvider(
-                        'participant-delete/'+part.participant_id, part)"
-                    class="btn btn-sm btn-warning"
+                        'partcommitments/',part)"
+                    class="ui-button-success"
                 >
-                    Delete
-                </button>
-            </div>
-            <div>
-                <button
-                    (click)="saveDataIntoGeneralProvider('partcommitments/',part)"
-                    class="btn btn-sm btn-success"
-                >
-                    See commitments
                 </button>
             </div>
         </div>
