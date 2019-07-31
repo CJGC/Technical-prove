@@ -61,7 +61,9 @@ export class ActListComponent {
         );
     }
 
-    public saveDataIntoGeneralProvider(url : string, act : Act) : void {
+    public saveDataIntoGeneralProvider(url : string, act : Act) 
+        : void 
+    {
         this.generalProvider.clearData();
         this.generalProvider.setData([act]);
         this._router.navigate([url]);
