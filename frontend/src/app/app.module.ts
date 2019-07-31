@@ -25,7 +25,6 @@ import { CommitmentShowComponent } from './components/commitment/commitment-show
 import { CommitmentEditComponent } from './components/commitment/component-edit.component';
 import { CommitmentDeleteComponent } from './components/commitment/commitment-delete.component';
 
-import { DialogService, MessageService } from 'primeng/api';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { CreateActComponent } from './components/act/act-create.component';
 
@@ -82,9 +81,7 @@ import { ToastModule } from 'primeng/toast';
     ActDeleteComponent
   ],
   providers: [
-    GeneralProvider, 
-    DialogService, 
-    MessageService
+    GeneralProvider
   ],
   bootstrap: [AppComponent]
 })
