@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ParticipantService } from 'src/app/services/participant.service';
 import { Participant } from 'src/app/models/participant';
-import { GeneralProvider } from 'src/app/providers/general.provider';
+import { ActivatedRoute } from '@angular/router';
 
 @Component ({
     selector : 'participant-show',
@@ -10,16 +10,28 @@ import { GeneralProvider } from 'src/app/providers/general.provider';
 })
 export class ParticipantShowComponent {
     private title : string;
-    private participant : Participant;
+    private participant : Array<Participant>;
 
     constructor (
-        private generalProvider : GeneralProvider,
+        private activatedRouter : ActivatedRoute,
+        private participantService : ParticipantService
     ) {
         this.title = "Participant details";
+        this.participant = new Array<Participant>();
+        this.getParticipants();
     }
 
-    ngOnInit() {
-        this.participant = <Participant> this.generalProvider.getData().pop();
+    public getParticipants() {
+        this.activatedRouter.paramMap.subscribe ( param => {
+            const part_id = +param.get("id");
+            if (part_id == null) {
+                console.log("Incorrect argument name");
+                return;
+            }
+            this.participantService.getParticipant(part_id).subscribe (
+                res => this.participant.push(res),
+                error => console.log("Error getting part: ", error)
+            );
+        });
     }
-
 }
