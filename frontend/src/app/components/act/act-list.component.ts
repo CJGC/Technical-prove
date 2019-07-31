@@ -3,7 +3,7 @@ import { ActService } from 'src/app/services/act.service';
 import { Act } from 'src/app/models/act';
 import { GeneralProvider } from 'src/app/providers/general.provider';
 import { Router } from '@angular/router';
-import { DialogService } from 'primeng/api';
+import { DialogService, MessageService } from 'primeng/api';
 import { CreateActComponent } from './act-create.component';
 import { ActEditComponent } from './act-edit.component';
 import { ActDeleteComponent } from './act-delete.component';
@@ -11,7 +11,7 @@ import { ActDeleteComponent } from './act-delete.component';
 @Component ({
     selector : 'act-list',
     templateUrl : '../../views/act/act-list.html',
-    providers : [ActService]
+    providers : [ActService, DialogService, MessageService]
 })
 export class ActListComponent {
 
