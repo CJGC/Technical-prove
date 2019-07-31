@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
 import { ActService } from 'src/app/services/act.service';
-import { DynamicDialogRef, DynamicDialogConfig, MessageService } from 'primeng/api';
+import { DynamicDialogRef, DynamicDialogConfig, MessageService, DialogService } from 'primeng/api';
 import { Act } from 'src/app/models/act';
 
 @Component({
     selector : 'act-del',
     templateUrl : '../../views/act/act-delete.html',
-    providers : [ActService]
+    providers : [ActService, MessageService]
 })
 export class ActDeleteComponent {
 
