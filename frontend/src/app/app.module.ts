@@ -78,7 +78,8 @@ import { ToastModule } from 'primeng/toast';
   entryComponents : [
     CreateActComponent, 
     ActEditComponent,
-    ActDeleteComponent
+    ActDeleteComponent,
+    ParticipantEditComponent
   ],
   providers: [
     GeneralProvider
