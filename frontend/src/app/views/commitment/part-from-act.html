@@ -1,4 +1,8 @@
 <div>
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+</div>
+
+<div>
     <h3 style="text-align: center;"> 
         <strong> {{title}} </strong>
     </h3>
@@ -11,24 +15,30 @@
 <input
     type="button"
     value="Back"
-    [routerLink]="['../act-list']"
+    [routerLink]="['../../act-list/']"
     class="btn btn-primary"
 />
 
-<div *ngIf="participants; then proceed else wait"> </div>
-<ng-template #proceed>
-    <ol>
-        <li *ngFor="let part of participants">
-            <button
-                (click) = "saveIntoGeneralProvider('/create-commitment', part)"
-                class="btn btn-primary"
-            >
-                {{part.name}} {{part.surname}}
-            </button>
-        </li>
-    </ol>
-</ng-template>
+<p-table [value]="participants">
+    <ng-template pTemplate="header">
+        <tr>
+            <th 
+                style="text-align: center;"
+            > 
+                Available participants 
+            </th>
+        </tr>
+    </ng-template>
 
-<ng-template #wait>
-    <p> Loading ... </p>
-</ng-template>
+    <ng-template pTemplate="body" let-part>
+        <tr> 
+            <td> 
+                <a class="highligh"
+                    (click)="openDialog(part)"
+                >
+                    {{part.name}} {{part.surname}} 
+                </a>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
