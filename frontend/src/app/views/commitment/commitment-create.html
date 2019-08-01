@@ -12,55 +12,53 @@
 <hr>
 
 <form 
-    #commitmentForm="ngForm" 
-    (ngSubmit)="createCommitment()" 
-    id="commitmentForm"
->    
-    <label>
-        Title
-        <span 
-            *ngIf="!title.valid && title.touched"
-        >
-            You must to provide a title
-        </span>
-    </label>
-    <input 
-        #title="ngModel"
-        type="text"
-        name="title"
-        [(ngModel)]="commitment.title"
-        class="form-control"
-        required
-    />
-    
-    <label>
-        Description
-        <span 
-            *ngIf="!description.valid && description.touched"
-        >
-            You must to provide a description.
-        </span>
-    </label>
-    <textarea
-        #description="ngModel" 
-        name="description"
-        [(ngModel)]="commitment.description"
-        class="form-control"
-        required
-    >
-    </textarea>
+    [formGroup]="commitForm"
+    (ngSubmit)="commitForm.valid" 
+    id="commitForm"
+>
+    <div class="ui-g ui-fluid">
 
-    <br>
-    <input 
-        type="submit" 
-        value="Create" 
-        [disabled]="!commitmentForm.form.valid" 
-        class="btn btn-success"
-    >
-    <button
-        (click) = "saveDataIntoGeneralProvider()"
-        class="btn btn-primary"
-    >
-        Cancel
-    </button>
+        <div class="ui-g-12 ui-md-12">
+            <label> Title </label>
+            <input 
+                pInputText
+                type="text" 
+                class="form-input" 
+                formControlName="title"  
+                placeholder="Enter a title."
+            >
+        </div>
+
+        <div class="ui-g-12 ui-md-12">
+            <label> Content </label>
+            <textarea  
+                pInputTextarea 
+                class="form-input"
+                formControlName="description"
+                placeholder="Enter a description"> 
+            </textarea>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+            <button 
+                pButton
+                type="submit" 
+                label="Create"
+                (click)="createCommitment()"
+                [disabled]="!commitForm.valid" 
+                class="btn btn-success"
+            > </button>
+        </div>
+        
+        <div class="ui-g-12 ui-md-6">
+            <button
+                pButton
+                type="button"
+                label="Cancel"
+                (click) = "cancel()"
+                class="btn btn-primary"
+            > </button>
+        </div>
+
+    </div>
 </form>
