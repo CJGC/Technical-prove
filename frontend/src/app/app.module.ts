@@ -82,7 +82,8 @@ import { MessageService } from 'primeng/api';
     ActDeleteComponent,
     ParticipantCreateComponent,
     ParticipantEditComponent,
-    ParticipantDeleteComponent
+    ParticipantDeleteComponent,
+    CreateCommitmentComponent
   ],
   providers: [
     MessageService,
