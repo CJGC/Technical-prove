@@ -6,8 +6,6 @@
 
 <hr>
 
-<div *ngIf="actForm; then prooced else wait"> </div>
-<ng-template #prooced>
 <form 
     [formGroup]="actForm"
     (ngSubmit)="actForm.valid" 
@@ -15,11 +13,8 @@
 >    
     <div class="ui-g ui-fluid">
 
-        <div class="ui-g-12 ui-md-12 ui-inputgroup">
+        <div class="ui-g-12 ui-md-12">
             <label> Location </label>
-            <span class="ui-inputgroup-addon">
-                <i class="fa fa-user"></i>
-            </span>
             <input 
                 pInputText
                 type="text" 
@@ -30,72 +25,44 @@
         </div>
 
         <div class="ui-g-12 ui-md-12">
-            <div class="ui-inputgroup">
-
-                <label> Project </label>
-                <span class="ui-inputgroup-addon">
-                    <i class="fa fa-user"></i>
-                </span>
-
-                <input 
-                    pInputText
-                    type="text" 
-                    class="form-input"
-                    formControlName="project"  
-                    placeholder="Project"
-                >
-            </div>
+            <label> Project </label>
+            <input 
+                pInputText
+                type="text" 
+                class="form-input"
+                formControlName="project"  
+                placeholder="Enter a project"
+            >
         </div>
       
         <div class="ui-g-12 ui-md-12">
-            <div class="ui-inputgroup">
-                
-                <label> Content </label>
-                <span class="ui-inputgroup-addon">
-                    <i class="fa fa-user"></i>
-                </span>
-
-                <textarea  
-                    pInputTextarea 
-                    class="form-input"
-                    formControlName="content"
-                    placeholder="Content"> 
-                </textarea>
-            </div>
+            <label> Content </label>
+            <textarea  
+                pInputTextarea 
+                class="form-input"
+                formControlName="content"
+                placeholder="Enter a content"> 
+            </textarea>
         </div>
 
         <div class="ui-g-12 ui-md-12">
-            <div class="ui-inputgroup">
-
-                <label> Date </label>
-                <span class="ui-inputgroup-addon">
-                    <i class="fa fa-user"></i>
-                </span>
-                
-                <p-calendar 
-                    class="form-input"
-                    formControlName="date"  
-                    placeholder="Date"
-                >
-                </p-calendar>
-            </div>
+            <label> Date </label>
+            <p-calendar 
+                class="form-input"
+                formControlName="date"  
+                placeholder="Enter a date"
+            >
+            </p-calendar>
         </div>
 
         <div class="ui-g-12 ui-md-12">
-            <div class="ui-inputgroup">
-
-                <label> Next meeting date </label>
-                <span class="ui-inputgroup-addon">
-                    <i class="fa fa-user"></i>
-                </span>
-                <p-calendar
-                    class="form-input"
-                    formControlName="nextMeetingDate"
-                    placeholder="Next meeting date"
-                >
-                </p-calendar>
-                
-            </div>
+            <label> Next meeting date </label>
+            <p-calendar
+                class="form-input"
+                formControlName="nextMeetingDate"
+                placeholder="Enter next meeting date"
+            >
+            </p-calendar>
         </div>
 
         <div class="ui-g-12 ui-md-6">
@@ -121,8 +88,3 @@
     </div>    
 
 </form>
-</ng-template>
-
-<ng-template #wait>
-    <p> loading ... </p>
-</ng-template>
