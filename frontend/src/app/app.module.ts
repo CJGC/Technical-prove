@@ -33,6 +33,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { TableModule } from 'primeng/table';
 import { DataViewModule } from 'primeng/dataview';
 import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -79,9 +80,11 @@ import { ToastModule } from 'primeng/toast';
     CreateActComponent, 
     ActEditComponent,
     ActDeleteComponent,
+    ParticipantCreateComponent,
     ParticipantEditComponent
   ],
   providers: [
+    MessageService,
     GeneralProvider
   ],
   bootstrap: [AppComponent]
