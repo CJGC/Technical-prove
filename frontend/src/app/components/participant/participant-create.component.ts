@@ -3,6 +3,7 @@ import { ParticipantService } from 'src/app/services/participant.service';
 import { Participant } from 'src/app/models/participant';
 import { DynamicDialogRef, DynamicDialogConfig, MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component ({
     selector : 'participant-create',
@@ -12,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ParticipantCreateComponent {
 
     public partForm : FormGroup;
+    private title : string;
 
     constructor (
         private formBuilder : FormBuilder,
@@ -20,7 +22,8 @@ export class ParticipantCreateComponent {
         private participantService : ParticipantService,
     )
     {
-
+        this.title = "Create participant";
+        
         // building reactive form with their rules
         this.partForm = this.formBuilder.group({
             name : ['', [Validators.required]],
