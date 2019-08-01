@@ -12,7 +12,7 @@
     <input
         type="button"
         value="Create"
-        [routerLink]="['../participant-create/']"
+        (click)="openDialog(null,'create')"
         class="btn btn-primary"
     />
 </div>
