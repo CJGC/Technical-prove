@@ -7,10 +7,8 @@ import { ActShowComponent } from './components/act/act-show.component';
 import { MissinWebPageComponent } from './components/errors/missing-webpage.component';
 import { AppComponent } from './app.component';
 import { ParticipantListComponent } from './components/participant/participant-list.component';
-import { ParticipantCreateComponent } from './components/participant/participant-create.component';
 import { ParticipantShowComponent } from './components/participant/participant-show.component';
 import { ParticipantDeleteComponent } from './components/participant/participant-delete.component';
-import { ParticipantEditComponent } from './components/participant/participant-edit.component';
 import { ActParticipantsComponent } from './components/actParticipants/act-participants.component';
 import { GetParticipantsFromActaComponent } from './components/commitment/get-participants-from-acta.component';
 import { CreateCommitmentComponent } from './components/commitment/commitment.create.component';
@@ -24,9 +22,7 @@ const routes: Routes = [
   {path: 'act-show/:id', component : ActShowComponent },
 
   {path: 'participant-list', component: ParticipantListComponent},
-  {path: 'participant-create', component : ParticipantCreateComponent },
   {path: 'participant-show/:id', component : ParticipantShowComponent },
-  {path: 'participant-edit', component : ParticipantEditComponent},
   {path: 'participant-delete/:id', component : ParticipantDeleteComponent},
 
   {path: 'actparticipants', component : ActParticipantsComponent},
