@@ -95,8 +95,7 @@
                     pButton
                     type="button"
                     label="Add commitments"
-                    (click)="saveDataIntoGeneralProvider(
-                        '../partfromact', act)"
+                    [routerLink]="['../partfromact', act.actId]"
                     style="margin-top: 1%"
                     class="ui-button-success"
                 >
