@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ParticipantService } from 'src/app/services/participant.service';
 import { Participant } from 'src/app/models/participant';
-import { Router } from '@angular/router';
+import { DynamicDialogRef, DynamicDialogConfig, MessageService } from 'primeng/api';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component ({
     selector : 'participant-create',
@@ -10,23 +11,47 @@ import { Router } from '@angular/router';
 })
 export class ParticipantCreateComponent {
 
-    private title : string;
-    private participant : Participant;
+    public partForm : FormGroup;
 
     constructor (
+        private formBuilder : FormBuilder,
+        private dynamicDialogRef : DynamicDialogRef,
+        private messageService : MessageService,
         private participantService : ParticipantService,
-        private _router : Router
-    ) 
+    )
     {
-        this.participant = new Participant(0,"","","");
-        this.title = "Creating a participant";
+
+        // building reactive form with their rules
+        this.partForm = this.formBuilder.group({
+            name : ['', [Validators.required]],
+            surname : ['', [Validators.required]],
+            email : ['', [Validators.required]]
+        });
     }
 
-    createParticipant() {
-        this.participantService.creatParticipant(this.participant).
-        subscribe(
-            response => this._router.navigate(["/participant-list"]),
+    public createPart() {
+        let participant : Participant = <Participant> this.partForm.value;
+
+        this.participantService.creatParticipant(participant).
+        subscribe (
+            response => {
+                this.dynamicDialogRef.close(participant);
+                this.messageService.add({
+                    severity : 'success' ,
+                    summary : 'Infor',
+                    detail :  'Participant was created successfully'
+                });
+            },
             error => console.log("Error creating participant: ", error) 
-        )
+        );
+    }
+
+    public cancel() {
+        this.dynamicDialogRef.close();
+        this.messageService.add({
+            severity : 'info',
+            summary : 'Infor',
+            detail : 'Participant creation was cancelled'
+        });
     }
 }
