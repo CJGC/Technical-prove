@@ -20,7 +20,7 @@ export class ParticipantDeleteComponent {
     { }
 
     public delParticipant() : void {
-        let participant : Participant = this.dynamicDialogConf.data;
+        let participant : Participant = this.dynamicDialogConf.data.part;
 
         this.participantService.delParticipant(participant.participant_id).
         subscribe(
