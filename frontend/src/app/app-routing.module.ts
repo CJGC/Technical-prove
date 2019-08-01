@@ -8,10 +8,8 @@ import { MissinWebPageComponent } from './components/errors/missing-webpage.comp
 import { AppComponent } from './app.component';
 import { ParticipantListComponent } from './components/participant/participant-list.component';
 import { ParticipantShowComponent } from './components/participant/participant-show.component';
-import { ParticipantDeleteComponent } from './components/participant/participant-delete.component';
 import { ActParticipantsComponent } from './components/actParticipants/act-participants.component';
 import { GetParticipantsFromActaComponent } from './components/commitment/get-participants-from-acta.component';
-import { CreateCommitmentComponent } from './components/commitment/commitment.create.component';
 import { ParticipantCommitmentsComponent } from './components/commitment/participant-commitments.component';
 import { CommitmentShowComponent } from './components/commitment/commitment-show.component';
 import { CommitmentEditComponent } from './components/commitment/component-edit.component';
@@ -26,9 +24,8 @@ const routes: Routes = [
 
   {path: 'actparticipants', component : ActParticipantsComponent},
   
-  {path: 'partfromact', component : GetParticipantsFromActaComponent},
-  {path: 'create-commitment', 
-    component : CreateCommitmentComponent},
+  {path: 'partfromact/:id', component : GetParticipantsFromActaComponent},
+
   {path: 'partcommitments', component : ParticipantCommitmentsComponent},
   {path: 'commitment-show', component : CommitmentShowComponent},
   {path: 'commitment-edit', component : CommitmentEditComponent},
