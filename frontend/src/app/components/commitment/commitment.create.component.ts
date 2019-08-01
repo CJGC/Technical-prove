@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { CommitmentService } from 'src/app/services/commitment.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Commitment } from 'src/app/models/commitment';
-import { ActService } from 'src/app/services/act.service';
-import { ParticipantService } from 'src/app/services/participant.service';
 import { Participant } from 'src/app/models/participant';
 import { Act } from 'src/app/models/act';
-import { GeneralProvider } from 'src/app/providers/general.provider';
+import { DynamicDialogRef, MessageService, DynamicDialogConfig } from 'primeng/api';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector : 'commitment-create',
     templateUrl : '../../views/commitment/commitment-create.html',
-    providers : [CommitmentService, ActService, ParticipantService]
+    providers : [CommitmentService ]
 })
 export class CreateCommitmentComponent {
 
@@ -20,39 +18,52 @@ export class CreateCommitmentComponent {
     private _subtitle2 : string
     public act : Act;
     public participant : Participant;
-    public commitment : Commitment;
+    public commitForm : FormGroup;
 
     constructor (
+        private dynamicDialogRef : DynamicDialogRef,
+        private dynamicDialogConf : DynamicDialogConfig,
+        private messageService : MessageService,
         private commitmentService : CommitmentService,
-        private generalProvider : GeneralProvider,
-        private _router : Router
+        private formBuilder : FormBuilder,
     ) {
         this._title = "Create commitment";
-        this.commitment = new Commitment(0, "", "", null, null);
-        this.participant = <Participant> this.generalProvider.getData().pop();
-        this.act = <Act> this.generalProvider.getData().pop();
+        this.act = this.dynamicDialogConf.data.act;
+        this.participant = this.dynamicDialogConf.data.part;
         this._subtitle1 = "PROJECT'S ACT: " + this.act.project;
-        this._subtitle2 = "PARTICIPANT: " + this.participant.name + " " +
-            this.participant.surname
+        this._subtitle2 = "PARTICIPANT: " + 
+            this.participant.name + " " + this.participant.surname;
+        
+        this.commitForm = this.formBuilder.group({
+            title : ['', [Validators.required]],
+            description : ['', [Validators.required]] 
+        });
     }
 
-    public createCommitment() {
-        this.commitment.act = this.act;
-        this.commitment.participant = this.participant;
-        this.commitmentService.createCommitment(this.commitment).
+    public createCommitment() : void {
+        let commitment : Commitment = <Commitment> this.commitForm.value;
+        commitment.act = this.act;
+        commitment.participant = this.participant;
+        this.commitmentService.createCommitment(commitment).
         subscribe(
             response => {
-                this.generalProvider.clearData();
-                this.generalProvider.setData([this.act]);
-                this._router.navigate(['partfromact/']);
+                this.dynamicDialogRef.close();
+                this.messageService.add({
+                    severity : 'success',
+                    summary : 'Infor',
+                    detail : 'the commitment was created succesfully'
+                });
             },
             error => console.log("Error creating commitment", error)
         );
     }
 
-    public saveDataIntoGeneralProvider() {
-        this.generalProvider.clearData();
-        this.generalProvider.setData([this.act]);
-        this._router.navigate(['partfromact/']);
+    public cancel() : void {
+        this.dynamicDialogRef.close();
+        this.messageService.add({
+            severity : 'info',
+            summary : 'Infor',
+            detail : 'the commitment creation was cancelled'
+        });
     }
 }
