@@ -74,8 +74,7 @@
                     pButton
                     type="button"
                     label="Delete"
-                    (click)="saveDataIntoGeneralProvider(
-                        'participant-delete/'+part.participant_id, part)"
+                    (click)="openDialog(part, 'delete')"
                     class="ui-button-rounded ui-button-danger"
                 >
                 </button>
