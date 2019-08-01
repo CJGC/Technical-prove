@@ -7,7 +7,7 @@ import { ActService } from 'src/app/services/act.service';
 @Component({
   selector: 'create-act',
   templateUrl: '../../views/act/act-create.html',
-  providers : [ActService, MessageService]
+  providers : [ActService]
 })
 export class CreateActComponent implements OnInit {
 

@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
     selector : 'act-edit',
     templateUrl : '../../views/act/act-edit.html',
-    providers : [ActService, MessageService]
+    providers : [ActService]
 })
 export class ActEditComponent {
     private title : string;

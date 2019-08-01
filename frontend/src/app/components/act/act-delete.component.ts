@@ -6,7 +6,7 @@ import { Act } from 'src/app/models/act';
 @Component({
     selector : 'act-del',
     templateUrl : '../../views/act/act-delete.html',
-    providers : [ActService, MessageService]
+    providers : [ActService]
 })
 export class ActDeleteComponent {
 
