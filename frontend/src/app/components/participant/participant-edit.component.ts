@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ParticipantService } from 'src/app/services/participant.service';
 import { Participant } from 'src/app/models/participant';
-import { Router } from '@angular/router';
-import { GeneralProvider } from 'src/app/providers/general.provider';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MessageService, DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
 
 @Component({
     selector : 'participant-edit',
@@ -12,26 +12,53 @@ import { GeneralProvider } from 'src/app/providers/general.provider';
 export class ParticipantEditComponent {
     private title : string;
     private participant : Participant;
+    private partForm : FormGroup;
 
     constructor(
+        private formBuilder : FormBuilder,
+        private dynamicDialogRef : DynamicDialogRef,
+        private dynamicDialogConf : DynamicDialogConfig,
         private participantService : ParticipantService,
-        private generalProvider : GeneralProvider,
-        private _route : Router
+        private messageService : MessageService
     )
     {
         this.title = "Edit participant";
     }
 
     ngOnInit() {
-        this.participant = <Participant> this.generalProvider.getData().pop();
+        this.participant = this.dynamicDialogConf.data.part;
+
+        // defining formulary default data and validations rules
+        this.partForm = this.formBuilder.group({
+            participant_id : [this.participant.participant_id, []],
+            name : [this.participant.name, [Validators.required]],
+            surname : [this.participant.surname, [Validators.required]],
+            email : [this.participant.email, [Validators.required]]
+        });
     }
 
-    editParticipant() {
-        this.participantService.editParticipant(this.participant).
-        subscribe(
-            response => this._route.navigate(['/participant-list']),
-            error => console.log("Error editing participant: ", error)
+    public editPart() : void {
+        this.participant = this.partForm.value;
+        this.participantService.editParticipant(this.participant).subscribe (
+            response => {
+                this.dynamicDialogRef.close(this.participant);
+                this.messageService.add({
+                    severity : 'success',
+                    summary : 'Infor',
+                    detail : 'Participant was edited successfully'
+                });
+            },
+            error => console.log("Error upgrading participant.", error)
         );
+    }
+
+    public cancel() : void {
+        this.dynamicDialogRef.close();
+        this.messageService.add({
+            severity : 'info',
+            summary : 'Info',
+            detail : 'The participant edition was cancelled'
+        });
     }
 
 }
