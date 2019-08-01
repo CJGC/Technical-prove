@@ -71,3 +71,12 @@
 .form-input {
     width: 100%;
 }
+
+.highligh {
+    cursor: pointer;
+    text-decoration: underline !important;
+}
+
+.highligh:hover {
+    color: blue !important;
+}
