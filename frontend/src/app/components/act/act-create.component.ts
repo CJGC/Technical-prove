@@ -12,6 +12,7 @@ import { ActService } from 'src/app/services/act.service';
 export class CreateActComponent implements OnInit {
 
   public actForm : FormGroup;
+  public title : string;
   
   constructor(
       private dynamicDialogRef : DynamicDialogRef,
@@ -19,7 +20,9 @@ export class CreateActComponent implements OnInit {
       private formBuilder : FormBuilder,
       private actService : ActService,
     ) 
-    { }
+    { 
+      this.title = "Create act";
+    }
 
   ngOnInit() {
     
