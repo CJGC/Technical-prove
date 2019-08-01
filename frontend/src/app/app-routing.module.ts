@@ -23,7 +23,6 @@ const routes: Routes = [
 
   {path: 'participant-list', component: ParticipantListComponent},
   {path: 'participant-show/:id', component : ParticipantShowComponent },
-  {path: 'participant-delete/:id', component : ParticipantDeleteComponent},
 
   {path: 'actparticipants', component : ActParticipantsComponent},
   
