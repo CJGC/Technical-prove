@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommitmentService } from 'src/app/services/commitment.service';
 import { GeneralProvider } from 'src/app/providers/general.provider';
 import { Participant } from 'src/app/models/participant';
+import { DynamicDialogConfig, DynamicDialogRef, MessageService } from 'primeng/api';
+import { Commitment } from 'src/app/models/commitment';
 
 @Component({
     selector : 'act-del',
@@ -11,32 +13,43 @@ import { Participant } from 'src/app/models/participant';
 })
 export class CommitmentDeleteComponent {
 
-    private participant : Participant;
+    private commitment : Commitment;
     
     constructor (
+        private dynamicDialogConf : DynamicDialogConfig,
+        private dynamicDialogRef : DynamicDialogRef,
+        private messageService : MessageService,
         private commitmentService : CommitmentService,
         private activatedRoute : ActivatedRoute,
         private _router : Router,
         private generalProvider : GeneralProvider
     ) 
     { 
-        this.participant = this.generalProvider.getData().pop().participant;
+        this.commitment = <Commitment> this.dynamicDialogConf.data.commitment;
     }
 
     public delCommitment() : void {
-        let id : number;
-        this.activatedRoute.params.subscribe(
-            params =>  id = parseInt(params['id'],10)
+        
+        this.commitmentService.delCommitment(this.commitment.commitment_id).
+        subscribe(
+            resp => {
+                this.dynamicDialogRef.close(this.commitment);
+                this.messageService.add({
+                    severity : 'success',
+                    summary : 'info',
+                    detail : 'Commitment was deleted successfully'
+                });
+            },
+            error => console.log("Commitment was not deleted")
         );
-        this.commitmentService.delCommitment(id);
-        this.generalProvider.clearData();
-        this.generalProvider.setData([this.participant]);
-        this._router.navigate(["../partcommitments"]);
     }
 
-    public saveDataIntoGeneralProvider() {
-        this.generalProvider.clearData();
-        this.generalProvider.setData([this.participant]);
-        this._router.navigate(["../partcommitments"]);
+    public cancel() {
+        this.dynamicDialogRef.close(this.commitment);
+        this.messageService.add({
+            severity : 'info',
+            summary : 'info',
+            detail : 'Commitment was not deleted successfully'
+        });
     }
 }
