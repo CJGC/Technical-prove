@@ -68,4 +68,12 @@ export class CommitmentEditComponent {
         });
     }
 
+    /* Validators messages */
+    public title() : any {
+        return this.commitForm.get('title');
+    }
+
+    public description() : any {
+        return this.commitForm.get('description');
+    }
 }
