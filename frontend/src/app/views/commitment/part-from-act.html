@@ -22,7 +22,8 @@
 <p-table [value]="participants">
     <ng-template pTemplate="header">
         <tr>
-            <th 
+            <th
+                colspan="2" 
                 style="text-align: center;"
             > 
                 Available participants 
@@ -38,6 +39,18 @@
                 >
                     {{part.name}} {{part.surname}} 
                 </a>
+            </td>
+
+            <td>
+                <button
+                    pButton
+                    type="button"
+                    label="See commitments"
+                    [routerLink]="['../../partcommitments/', 
+                        act.actId, part.participant_id]"
+                    class="ui-button-success"
+                >
+                </button>
             </td>
         </tr>
     </ng-template>
