@@ -1,64 +1,60 @@
 <div>
-        <h3 style="text-align: center">
-            <strong>{{_title}}</strong>
-        </h3>
-        <h5>
-            <strong> {{_subtitle1}} </strong>
-        </h5>
+    <h3 style="text-align: center">
+        <strong>{{_title}}</strong>
+    </h3>
+    <h5>
+        <strong> {{_subtitle1}} </strong>
+    </h5>
+</div>
+<hr> 
+ 
+<form 
+    [formGroup]="commitForm"
+    (ngSubmit)="commitForm.valid" 
+    id="commitForm"
+>
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-12">
+            <label> Title </label>
+            <input 
+                pInputText
+                type="text" 
+                class="form-input" 
+                formControlName="title"  
+                placeholder="Enter a title."
+            >
+        </div>
+
+        <div class="ui-g-12 ui-md-12">               
+            <label> Description </label>
+            <textarea  
+                pInputTextarea 
+                class="form-input"
+                formControlName="description"
+                placeholder="Enter a description"> 
+            </textarea>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+            <button
+                pButton
+                type="button"
+                label="Submit"
+                [disabled]="!commitForm.valid" 
+                (click)="editCommitment()"
+                class="btn btn-primary"
+            > </button>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+            <button 
+                pButton
+                type="button"
+                label="Cancel" 
+                (click)="cancel()"
+                class="btn btn-success"
+            > </button>
+        </div>
+
     </div>
-        
-    <hr>
-    
-    <form 
-        #commitmentForm="ngForm" 
-        (ngSubmit)="editCommitment('partcommitments/')" 
-        id="commitmentForm"
-    >    
-        <label>
-            Title
-            <span 
-                *ngIf="!title.valid && title.touched"
-            >
-                You must to provide a title
-            </span>
-        </label>
-        <input 
-            #title="ngModel"
-            type="text"
-            name="title"
-            [(ngModel)]="commitment.title"
-            class="form-control"
-            required
-        />
-        
-        <label>
-            Description
-            <span 
-                *ngIf="!description.valid && description.touched"
-            >
-                You must to provide a description.
-            </span>
-        </label>
-        <textarea
-            #description="ngModel" 
-            name="description"
-            [(ngModel)]="commitment.description"
-            class="form-control"
-            required
-        >
-        </textarea>
-    
-        <br>
-        <input 
-            type="submit" 
-            value="Submit" 
-            [disabled]="!commitmentForm.form.valid" 
-            class="btn btn-success"
-        >
-        <button
-            (click) = "saveDataIntoGeneralProvider('partcommitments/')"
-            class="btn btn-primary"
-        >
-            Cancel
-        </button>
-    </form>
+</form>
