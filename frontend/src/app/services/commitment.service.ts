@@ -42,4 +42,12 @@ export class CommitmentService {
             "getpartcommitments/" + participant_id);
     }
 
+    public getCommitmentsByActAndPartId(
+        act_id : number, participant_id : number)
+        : Observable<Array<Commitment>>
+    {
+        return this._http.get<Array<Commitment>>(this.url + 
+            "getcommitmentsbyactandpart/" + act_id + "/" + participant_id);
+    }
+
 }
