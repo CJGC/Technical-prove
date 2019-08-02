@@ -61,4 +61,22 @@ export class CreateActComponent implements OnInit {
       detail : 'The act creation was cancelled'
     });
   }
+
+  /* Validators messages */
+  public location () : any {
+    return this.actForm.get('location');
+  }
+
+  public project () : any {
+    return this.actForm.get('project');
+  }
+
+  public content () : any {
+    return this.actForm.get('content');
+  }
+  
+  public date () : any {
+    return this.actForm.get('date');
+  }
+  
 }
