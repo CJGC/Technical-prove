@@ -1,5 +1,6 @@
 package com.utp.Act.beans;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,26 +8,37 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Commitments {
-    
+public class Commitments implements Serializable {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer commitment_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer commitmentId;
     private String title;
     private String description;
     @ManyToOne
     private Act act;
     @ManyToOne
     private Participants participant;
-    
-    public Commitments() {}
-    
-    public Integer getCommitment_id() {
-        return commitment_id;
+
+    public Commitments() {
     }
 
-    public void setCommitment_id(Integer commitment_id) {
-        this.commitment_id = commitment_id;
+    public Commitments(
+            Integer commitmentId, String title, String description, Act act,
+            Participants participant) {
+        this.commitmentId = commitmentId;
+        this.title = title;
+        this.description = description;
+        this.act = act;
+        this.participant = participant;
+    }
+
+    public Integer getCommitmentId() {
+        return commitmentId;
+    }
+
+    public void setCommitmentId(Integer commitmentId) {
+        this.commitmentId = commitmentId;
     }
 
     public String getTitle() {
@@ -60,5 +72,5 @@ public class Commitments {
     public void setParticipant(Participants participant) {
         this.participant = participant;
     }
-    
+
 }
