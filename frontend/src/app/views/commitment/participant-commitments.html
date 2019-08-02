@@ -1,4 +1,8 @@
 <div>
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+</div>
+
+<div>
     <h3 style="text-align: center"> 
         <strong> {{ title }} </strong> 
     </h3>
@@ -63,14 +67,13 @@
 
             <div>
                 <button 
-                    (click)="loadDataIntoGeneralProvider('commitment-edit', commit)"
+                    (click)="openDialog(commit, 'edit')"
                     class="btn btn-warning"
                 >
                     Edit
                 </button>
                 <button
-                    (click)="loadDataIntoGeneralProvider('commitment-delete/' + commit.commitment_id, 
-                        commit)" 
+                    (click)="openDialog(commit, 'delete')" 
                     class="btn btn-danger"
                 >
                     Delete
