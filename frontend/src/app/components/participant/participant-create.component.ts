@@ -58,7 +58,7 @@ export class ParticipantCreateComponent {
         });
     }
 
-    /* Validators message */
+    /* Validators messages */
     public name() {
         return this.partForm.get('name');
     }
