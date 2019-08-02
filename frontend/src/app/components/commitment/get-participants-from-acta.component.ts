@@ -30,7 +30,7 @@ export class GetParticipantsFromActaComponent {
         this.title = "Select desired participant to add a commitment!";
 
         this.activatedRoute.paramMap.subscribe(param => {
-            const actId = +param.get("id");
+            const actId = +param.get("act_id");
             if (actId == null) {
                 console.log("Incorrect argument's name");
                 return
