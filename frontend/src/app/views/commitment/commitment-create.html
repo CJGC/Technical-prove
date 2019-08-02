@@ -20,6 +20,15 @@
 
         <div class="ui-g-12 ui-md-12">
             <label> Title </label>
+            
+            <span 
+                style="background-color: red"
+                *ngIf="(title().dirty || title().touched) 
+                    && title().invalid && title().errors.required"
+            >
+                Commitment title is required
+            </span>
+            
             <input 
                 pInputText
                 type="text" 
@@ -31,6 +40,15 @@
 
         <div class="ui-g-12 ui-md-12">
             <label> Content </label>
+
+            <span 
+                style="background-color: red"
+                *ngIf="(description().dirty || description().touched) 
+                    && description().invalid && description().errors.required"
+            >
+                Commitment description is required
+            </span>
+
             <textarea  
                 pInputTextarea 
                 class="form-input"
