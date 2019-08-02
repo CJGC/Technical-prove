@@ -56,4 +56,12 @@ public class CommitmentsController {
     {
         return commitmentsService.getCommitmentsByPartcicipant(participant_id);
     }
+    
+    @GetMapping(value="getcommitmentsbyactandpart/{act_id}/{participant_id}")
+    public List<Commitments> getCommitmentByActAndParticipantID(
+        @PathVariable Integer act_id, @PathVariable Integer participant_id)
+    {
+        return commitmentsService.getCommitmentByActAndtParticipantID(
+                act_id, participant_id);
+    }
 }
