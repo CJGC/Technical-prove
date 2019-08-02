@@ -16,9 +16,9 @@ public class Participants implements Serializable {
     private String surname;
     private String email;
 
-    public Participants(Integer participant_id, String name, String surname, 
+    public Participants(Integer participantId, String name, String surname, 
             String email) {
-        this.participantId = participant_id;
+        this.participantId = participantId;
         this.name = name;
         this.surname = surname;
         this.email = email;
