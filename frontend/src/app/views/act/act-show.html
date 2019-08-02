@@ -12,10 +12,19 @@
         value="Back"
         class="btn btn-primary btn-bg"
         [routerLink]="['../../act-list']"
-    /> 
+    />
+
+    <input
+        style="margin-left: 1%"
+        type="button"
+        value="Print"
+        class="btn btn-primary btn-bg"
+        (click)="printModule('act-table')"
+    />
+    
 </div>
 
-<p-table [value]="act">
+<p-table id="act-table" [value]="act">
     <ng-template pTemplate="header">
         <tr>
             <th 
