@@ -26,7 +26,7 @@ const routes: Routes = [
   
   {path: 'partfromact/:id', component : GetParticipantsFromActaComponent},
 
-  {path: 'partcommitments', component : ParticipantCommitmentsComponent},
+  {path: 'partcommitments/:act_id/:part_id', component : ParticipantCommitmentsComponent},
   {path: 'commitment-show', component : CommitmentShowComponent},
   {path: 'commitment-edit', component : CommitmentEditComponent},
   {path: 'commitment-delete/:id', component : CommitmentDeleteComponent},
