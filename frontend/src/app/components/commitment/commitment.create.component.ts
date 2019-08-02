@@ -28,12 +28,15 @@ export class CreateCommitmentComponent {
         private formBuilder : FormBuilder,
     ) {
         this._title = "Create commitment";
+    }
+
+    public ngOnInit() : void {
         this.act = this.dynamicDialogConf.data.act;
         this.participant = this.dynamicDialogConf.data.part;
         this._subtitle1 = "PROJECT'S ACT: " + this.act.project;
         this._subtitle2 = "PARTICIPANT: " + 
             this.participant.name + " " + this.participant.surname;
-        
+
         this.commitForm = this.formBuilder.group({
             title : ['', [Validators.required]],
             description : ['', [Validators.required]] 
@@ -65,5 +68,14 @@ export class CreateCommitmentComponent {
             summary : 'Infor',
             detail : 'the commitment creation was cancelled'
         });
+    }
+
+    /* Validators messages */
+    public title() : any {
+        return this.commitForm.get('title');
+    }
+
+    public description() : any {
+        return this.commitForm.get('description');
     }
 }
