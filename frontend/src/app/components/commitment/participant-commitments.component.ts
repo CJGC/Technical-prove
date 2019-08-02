@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { CommitmentService } from 'src/app/services/commitment.service';
-import { GeneralProvider } from 'src/app/providers/general.provider';
 import { Participant } from 'src/app/models/participant';
 import { Commitment } from 'src/app/models/commitment';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ParticipantService } from 'src/app/services/participant.service';
+import { DialogService } from 'primeng/api';
+import { CommitmentEditComponent } from './component-edit.component';
+import { CommitmentDeleteComponent } from './commitment-delete.component';
 
 @Component({
     selector : 'part-commitments',
     templateUrl : '../../views/commitment/participant-commitments.html',
-    providers : [CommitmentService, ParticipantService]
+    providers : [CommitmentService, ParticipantService, DialogService]
 })
 export class ParticipantCommitmentsComponent {
 
@@ -21,8 +23,7 @@ export class ParticipantCommitmentsComponent {
     constructor (
         private commitmentService : CommitmentService,
         private participantService : ParticipantService,
-        private generalProvider : GeneralProvider,
-        private _router : Router,
+        private dialogService : DialogService,
         private activatedRouter : ActivatedRoute
     ) {
 
@@ -37,12 +38,12 @@ export class ParticipantCommitmentsComponent {
             this.participantService.getParticipant(part_id).subscribe(
                 res => this.participant = res,
                 error => console.log("Error getting participant"),
-                () => this.loadCommitments()
+                () => this.getCommitments()
             );
         });
     }
 
-    public loadCommitments (): void {
+    public getCommitments (): void {
         this.title = this.participant.name + "'s commitments";
         this.commitmentService.getCommitmentsByParticipantId(
             this.participant.participant_id).
@@ -50,6 +51,28 @@ export class ParticipantCommitmentsComponent {
                 partCommit => this.commitments = partCommit, 
                 error => console.log("Error getting part commitments: ", error)
             );
+    }
+
+    public openDialog(commitment : Commitment, tc : string) : void {
+        let targetComponent : any;
+        if(tc == "edit")
+            targetComponent = CommitmentEditComponent;
+        else
+            targetComponent = CommitmentDeleteComponent;
+
+        let dialog = this.dialogService.open(
+            targetComponent,
+            {
+                header : tc + ' commitment',
+                width : '60%',
+                data : {commitment : commitment}
+            }
+        );
+
+        dialog.onClose.subscribe( 
+            response => {if (response != null) this.getCommitments()},
+            error => console.log("Error closing dialog", error)
+        );
     }
 
 }
