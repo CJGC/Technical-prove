@@ -24,10 +24,10 @@ const routes: Routes = [
 
   {path: 'actparticipants', component : ActParticipantsComponent},
   
-  {path: 'partfromact/:id', component : GetParticipantsFromActaComponent},
+  {path: 'partfromact/:act_id', component : GetParticipantsFromActaComponent},
 
   {path: 'partcommitments/:act_id/:part_id', component : ParticipantCommitmentsComponent},
-  {path: 'commitment-show', component : CommitmentShowComponent},
+  {path: 'commitment-show/:commit_id', component : CommitmentShowComponent},
   {path: 'commitment-edit', component : CommitmentEditComponent},
   {path: 'commitment-delete/:id', component : CommitmentDeleteComponent},
   {path: '', component : ActListComponent },
