@@ -17,6 +17,15 @@
 
         <div class="ui-g-12 ui-md-12">
             <label> Location </label>
+
+            <span 
+                style="background-color: red"
+                *ngIf="(location().dirty || location().touched) 
+                    && location().invalid && location().errors.required"
+            > 
+                Location is required
+            </span>
+
             <input 
                 pInputText
                 type="text" 
@@ -28,6 +37,15 @@
 
         <div class="ui-g-12 ui-md-12">
             <label> Project </label>
+
+            <span 
+                style="background-color: red"
+                *ngIf="(project().dirty || project().touched) 
+                    && project().invalid && project().errors.required"
+            > 
+                Project name is required
+            </span>
+
             <input 
                 pInputText
                 type="text" 
@@ -39,6 +57,15 @@
       
         <div class="ui-g-12 ui-md-12">               
             <label> Content </label>
+
+            <span 
+                style="background-color: red"
+                *ngIf="(content().dirty || content().touched) 
+                    && content().invalid && content().errors.required"
+            > 
+                Content is required
+            </span>
+
             <textarea  
                 pInputTextarea 
                 class="form-input"
@@ -48,7 +75,16 @@
         </div>
 
         <div class="ui-g-12 ui-md-12">
-            <label> Date </label>     
+            <label> Date </label>
+            
+            <span 
+                style="background-color: red"
+                *ngIf="(date().dirty || date().touched) 
+                    && date().invalid && date().errors.required"
+            > 
+                Date is required
+            </span>
+            
             <p-calendar
                 class="form-input"
                 formControlName="date"
