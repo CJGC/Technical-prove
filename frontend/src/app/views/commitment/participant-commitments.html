@@ -4,6 +4,7 @@
     </h3>
 </div>
 <hr>
+
 <div>
     <input
         type="button"
@@ -43,18 +44,24 @@
                 text-align: center;"
         >
             <div>
-                <h3> <strong> Commitment: </strong> {{commit.title}}</h3>
+                <h4>
+                    <strong>
+                        <a [routerLink]="['../../../commitment-show/', 
+                            commit.commitment_id]">
+                            {{commit.title}}
+                        </a>
+                    </strong>
+                </h4>
             </div>
+
             <div>
-                <h5> <strong> Project's act: </strong>{{commit.act.project}} </h5>
+                <h5> 
+                    <strong> Project act: </strong>
+                    {{commit.act.project}} 
+                </h5>
             </div>
+
             <div>
-                <button
-                    (click)="loadDataIntoGeneralProvider('commitment-show', commit)" 
-                    class="btn btn-primary"
-                >
-                    Show
-                </button>
                 <button 
                     (click)="loadDataIntoGeneralProvider('commitment-edit', commit)"
                     class="btn btn-warning"
