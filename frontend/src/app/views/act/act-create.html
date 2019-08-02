@@ -15,8 +15,18 @@
 
         <div class="ui-g-12 ui-md-12">
             <label> Location </label>
+
+            <span 
+                style="background-color: red"
+                *ngIf="(location().dirty || location().touched) 
+                    && location().invalid && location().errors.required"
+            > 
+                Location is required
+            </span>
+
             <input 
                 pInputText
+                maxlength="250"
                 type="text" 
                 class="form-input" 
                 formControlName="location"  
@@ -26,19 +36,39 @@
 
         <div class="ui-g-12 ui-md-12">
             <label> Project </label>
+            
+            <span 
+                style="background-color: red"
+                *ngIf="(project().dirty || project().touched) 
+                    && project().invalid && project().errors.required"
+            > 
+                Project name is required
+            </span>
+            
             <input 
                 pInputText
+                maxlength="250"
                 type="text" 
                 class="form-input"
                 formControlName="project"  
-                placeholder="Enter a project"
+                placeholder="Enter a project name"
             >
         </div>
-      
+ 
         <div class="ui-g-12 ui-md-12">
             <label> Content </label>
+
+            <span 
+                style="background-color: red"
+                *ngIf="(content().dirty || content().touched) 
+                    && content().invalid && content().errors.required"
+            > 
+                Content is required
+            </span>
+
             <textarea  
-                pInputTextarea 
+                pInputTextarea
+                maxlength="250" 
                 class="form-input"
                 formControlName="content"
                 placeholder="Enter a content"> 
@@ -47,6 +77,15 @@
 
         <div class="ui-g-12 ui-md-12">
             <label> Date </label>
+
+            <span 
+                style="background-color: red"
+                *ngIf="(date().dirty || date().touched) 
+                    && date().invalid && date().errors.required"
+            > 
+                Date is required
+            </span>
+
             <p-calendar 
                 class="form-input"
                 formControlName="date"  
