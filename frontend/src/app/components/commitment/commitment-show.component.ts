@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { CommitmentService } from 'src/app/services/commitment.service';
-import { GeneralProvider } from 'src/app/providers/general.provider';
 import { Commitment } from 'src/app/models/commitment';
-import { Participant } from 'src/app/models/participant';
-import { Router } from '@angular/router';
+import {  ActivatedRoute } from '@angular/router';
 
 @Component({
     selector : 'commit-show',
@@ -12,24 +10,36 @@ import { Router } from '@angular/router';
 })
 export class CommitmentShowComponent {
     private title : string;
-    public commitment : Commitment;
-    public participant : Participant;
+    public commitment : Array<Commitment>;
+    public participant_id : number;
+    public actId : number;
 
     constructor(
         private commitmentService : CommitmentService,
-        private generalProvider : GeneralProvider,
-        private _router : Router
+        private activatedRoute : ActivatedRoute
     ) 
     {
-        this.commitment = <Commitment> this.generalProvider.getData().pop();
-        this.participant = this.commitment.participant;
-        this.title = "Show " + this.participant.name + " " +
-            this.participant.surname + "'s commitment";
+        this.commitment = Array<Commitment>();
+        this.activatedRoute.paramMap.subscribe(param => {
+            const commit_id = +param.get("commit_id");
+
+            if (commit_id == null) {
+                console.log("Incorrect argument name");
+                return;
+            }
+            this.commitmentService.getCommitment(commit_id).subscribe (
+                res => this.commitment.push(res),
+                error => console.log("Error getting act: ", error),
+                () => this.loadExtraInfo()
+            );                
+        });
     }
 
-    public loadDataIntoGeneralProvider(url : string) : void {
-        this.generalProvider.clearData();
-        this.generalProvider.setData([this.participant]);
-        this._router.navigate([url]);
+    public loadExtraInfo() : void {
+        this.participant_id = this.commitment[0].participant.participant_id;
+        this.actId = this.commitment[0].act.actId;
+        this.title = "Show " + this.commitment[0].participant.name + " " +
+            this.commitment[0].participant.surname + "'s commitment";
     }
+
 }
