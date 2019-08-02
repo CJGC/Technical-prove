@@ -61,7 +61,7 @@ public class CommitmentsController {
     public List<Commitments> getCommitmentByActAndParticipantID(
         @PathVariable Integer act_id, @PathVariable Integer participant_id)
     {
-        return commitmentsService.getCommitmentByActAndtParticipantID(
+        return commitmentsService.getCommitmentByActAndParticipantID(
                 act_id, participant_id);
     }
 }
