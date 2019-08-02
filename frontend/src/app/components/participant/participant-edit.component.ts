@@ -33,7 +33,8 @@ export class ParticipantEditComponent {
             participant_id : [this.participant.participant_id, []],
             name : [this.participant.name, [Validators.required]],
             surname : [this.participant.surname, [Validators.required]],
-            email : [this.participant.email, [Validators.required]]
+            email : [this.participant.email, [Validators.required, 
+                Validators.email]]
         });
     }
 
@@ -61,4 +62,16 @@ export class ParticipantEditComponent {
         });
     }
 
+    /* Validators messages */
+    public name() {
+        return this.partForm.get('name');
+    }
+
+    public surname() {
+        return this.partForm.get('surname');
+    }
+
+    public email() {
+        return this.partForm.get('email');
+    }
 }
