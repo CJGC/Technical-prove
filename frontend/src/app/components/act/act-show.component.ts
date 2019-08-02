@@ -1,4 +1,4 @@
-import { Component, SystemJsNgModuleLoader, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Act } from 'src/app/models/act';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActService } from 'src/app/services/act.service';
@@ -39,4 +39,12 @@ export class ActShowComponent implements OnInit {
         });
     }
 
+    public printAct(id : string) : void {
+        let generator = window.open(",'name,'");
+        let layetext = document.getElementById(id);
+        generator.document.write(layetext.innerHTML);
+        generator.document.close();
+        generator.print();
+        generator.close();
+    }
 }
