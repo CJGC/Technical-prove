@@ -8,7 +8,7 @@
     <input
         type="button"
         value="Back"
-        [routerLink]="['../participant-list']"
+        [routerLink]="['../../../partfromact/', act_id]"
         class="btn btn-primary"
     />
 </div>
@@ -19,7 +19,6 @@
     [loading]="loading" 
     [paginator]="true" 
     [rows]="12"
-    paginatorPosition="both"
     filterBy="title,act.project"
 >
     <p-header>
@@ -30,60 +29,24 @@
             <input 
                 type="search" 
                 pInputText 
-                placeholder="Search by date" 
+                placeholder="Filter" 
                 (keyup)="dv.filter($event.target.value)"
             >
         </div> 
-        <div style="text-align: right">
-            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-        </div>
     </p-header>
     <ng-template let-commit pTemplate="listItem">
         <div 
             class="ui-8" 
-            style="padding: 2em; border-bottom: 1px solid #d9d9d9"
+            style="
+                padding: 2em; 
+                border-bottom: 1px solid #d9d9d9;
+                text-align: center;"
         >
             <div>
                 <h3> <strong> Commitment: </strong> {{commit.title}}</h3>
             </div>
             <div>
                 <h5> <strong> Project's act: </strong>{{commit.act.project}} </h5>
-            </div>
-            <div>
-                <button
-                    (click)="loadDataIntoGeneralProvider('commitment-show', commit)" 
-                    class="btn btn-primary"
-                >
-                    Show
-                </button>
-                <button 
-                    (click)="loadDataIntoGeneralProvider('commitment-edit', commit)"
-                    class="btn btn-warning"
-                >
-                    Edit
-                </button>
-                <button
-                    (click)="loadDataIntoGeneralProvider('commitment-delete/' + commit.commitment_id, 
-                        commit)" 
-                    class="btn btn-danger"
-                >
-                    Delete
-                </button>
-            </div>
-        </div>
-    </ng-template>
-    <ng-template let-commit pTemplate="gridItem">
-        <div 
-            class="ui-g-12 ui-md-3"
-            style="padding: 2em; 
-                border-bottom: 1px solid #d9d9d9; 
-                text-align: center"
-        >
-            <div>
-                <h3> <strong> Commitment: </strong> {{commit.title}}</h3>
-            </div>
-            <div>
-                <h5> <strong> Act's project: </strong>{{commit.act.project}} </h5>
             </div>
             <div>
                 <button
