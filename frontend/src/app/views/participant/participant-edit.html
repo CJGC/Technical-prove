@@ -16,8 +16,16 @@
 
             <div class="ui-g-12 ui-md-12">
                 <label> Name </label>
+                <span 
+                    style="background-color: red"
+                    *ngIf="(name().dirty || name().touched) && name().invalid
+                        && name().errors.required"
+                > 
+                    Participant's name is required
+                </span>
                 <input 
                     pInputText
+                    maxlength="100"
                     type="text"
                     formControlName="name"
                     class="form-input"
@@ -27,8 +35,16 @@
             
             <div class="ui-g-12 ui-md-12">
                 <label> Surname </label>
+                <span 
+                    style="background-color: red"
+                    *ngIf="(surname().dirty || surname().touched) && 
+                        surname().invalid && surname().errors.required"
+                >
+                    Participant's surname is required
+                </span>
                 <input 
                     pInputText
+                    maxlength="100"
                     type="text" 
                     formControlName="surname"
                     class="form-input"
@@ -38,6 +54,13 @@
             
             <div class="ui-g-12 ui-md-12">
                 <label> Email </label>
+                <span 
+                    style="background-color: red"
+                    *ngIf="(email().dirty || email().touched) && 
+                        email().invalid && email().errors.required"
+                >
+                    Participant's email is required
+                </span>
                 <input
                     pInputText
                     type="email"
