@@ -28,7 +28,7 @@ export class ParticipantCreateComponent {
         this.partForm = this.formBuilder.group({
             name : ['', [Validators.required]],
             surname : ['', [Validators.required]],
-            email : ['', [Validators.required]]
+            email : ['', [Validators.required, Validators.email]]
         });
     }
 
@@ -56,5 +56,18 @@ export class ParticipantCreateComponent {
             summary : 'Infor',
             detail : 'Participant creation was cancelled'
         });
+    }
+
+    /* Validators message */
+    public name() {
+        return this.partForm.get('name');
+    }
+
+    public surname() {
+        return this.partForm.get('surname');
+    }
+
+    public email() {
+        return this.partForm.get('email');
     }
 }
