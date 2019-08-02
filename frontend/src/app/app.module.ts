@@ -34,6 +34,7 @@ import { TableModule } from 'primeng/table';
 import { DataViewModule } from 'primeng/dataview';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { PrintComponent } from './components/print/print.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { MessageService } from 'primeng/api';
     CommitmentDeleteComponent,
     ParticipantCommitmentsComponent,
 
-    MissinWebPageComponent
+    MissinWebPageComponent,
+    PrintComponent
   ],
   imports: [
     BrowserModule,
