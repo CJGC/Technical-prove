@@ -4,35 +4,61 @@
     </h3>
 </div>
 <hr>
+
 <div>
     <button 
-        (click)="loadDataIntoGeneralProvider('partcommitments')"
+        [routerLink]="['../../partcommitments', 
+            actId, participant_id]"
         class="btn btn-primary"
     >
         Back
     </button>
 </div>
+
 <hr>
-<div >
-    <ul>
-        <li> 
-            <strong> Commitment Id: </strong> 
-            {{commitment.commitment_id}} 
-        </li>
-        <li> 
-            <strong> Commitment's title: </strong> 
-            {{commitment.title}} 
-        </li>
-        <li> 
-            <strong> Belong to: </strong> 
-            {{commitment.participant.name}} {{commitment.participant.surname}} 
-        </li>
-        <li>
-            <strong> Project's act: </strong> {{commitment.act.project}} 
-        </li>
-        <li> 
-            <strong> Commitment's description: </strong> 
-            {{commitment.description}}
-        </li>
-    </ul>
-</div>
+<p-table [value]="commitment">
+    <ng-template pTemplate="header">
+        <tr>
+            <th 
+                colspan="2"
+                style="text-align: center;"
+            > 
+                Commitment info
+            </th>
+        </tr>
+        <tr>
+            <th style="text-align: center;"> 
+                Description 
+            </th>
+            <th style="text-align: center;"> 
+                Data 
+            </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-commit>
+        <tr> 
+            <td> <strong> Title: </strong> </td> 
+            <td> {{commit.title}} </td> 
+        </tr>
+
+        <tr> 
+            <td> <strong> Belong to: </strong> </td>
+            <td> 
+                {{commit.participant.name}} 
+                {{commit.participant.surname}}
+            </td> 
+        </tr>
+
+        <tr>
+            <td> <strong> Project act: </strong> </td>
+            <td> {{commit.act.project}} </td>
+        </tr>
+
+        <tr> 
+            <td> <strong> Commitment description: </strong> </td>
+            <td> {{commit.description}} </td> 
+        </tr>
+
+    </ng-template>
+</p-table>
