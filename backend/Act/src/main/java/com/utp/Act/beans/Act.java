@@ -2,6 +2,7 @@ package com.utp.Act.beans;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Act implements Serializable {
     private Integer actId;
     private String location;
     private String project;
+    @Column(length=2048)
     private String content;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     Date actDate;
