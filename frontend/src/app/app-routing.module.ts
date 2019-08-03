@@ -14,11 +14,10 @@ import { ParticipantCommitmentsComponent } from './components/commitment/partici
 import { CommitmentShowComponent } from './components/commitment/commitment-show.component';
 import { CommitmentEditComponent } from './components/commitment/component-edit.component';
 import { CommitmentDeleteComponent } from './components/commitment/commitment-delete.component';
-import { PrintComponent } from './components/print/print.component';
 
 const routes: Routes = [
   {path: 'act-list', component: ActListComponent},
-  {path: 'act-show/:id', component : ActShowComponent },
+  {path: 'act-show/:act_id', component : ActShowComponent },
 
   {path: 'participant-list', component: ParticipantListComponent},
   {path: 'participant-show/:id', component : ParticipantShowComponent },
@@ -30,7 +29,6 @@ const routes: Routes = [
   {path: 'partcommitments/:act_id/:part_id', component : ParticipantCommitmentsComponent},
   {path: 'commitment-show/:commit_id', component : CommitmentShowComponent},
 
-  {path: 'printact/:act_id', component : PrintComponent},
   {path: '', component : ActListComponent },
   {path: '**', component : MissinWebPageComponent}
 ];
