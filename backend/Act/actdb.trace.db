@@ -1,3 +1,0 @@
-2019-07-22 10:25:30 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "ACT[*] "; expected "ALTER, ANALYZE"; SQL statement:
-act [42001-199]
