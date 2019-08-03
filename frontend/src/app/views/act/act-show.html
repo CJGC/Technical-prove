@@ -17,58 +17,91 @@
     <input
         style="margin-left: 1%"
         type="button"
-        value="Print"
+        value="Print act"
         class="btn btn-primary btn-bg"
-        (click)="printAct('act-table')"
+        (click)="printAct('document')"
     />
     
 </div>
 
-<p-table id="act-table" [value]="act">
-    <ng-template pTemplate="header">
-        <tr>
-            <th 
-                colspan="2"
-                style="text-align: center;"
-            > 
-                Act info 
-            </th>
-        </tr>
-        <tr>
-            <th style="text-align: center;"> 
-                Description 
-            </th>
-            <th style="text-align: center;"> 
-                Data 
-            </th>
-        </tr>
-    </ng-template>
+<div id="document"> 
 
-    <ng-template pTemplate="body" let-a>
-        <tr> 
-            <td> <strong> Date: </strong> </td> 
-            <td> {{a.date}} </td> 
-        </tr>
+    <div *ngIf="act">
 
-        <tr> 
-            <td> <strong> Next meeting date: </strong> </td>
-            <td> {{a.nextMeetingDate}} </td> 
-        </tr>
+        <strong>
+            <h5 style="text-align: left"> 
+                {{ act.date }} - {{ act.location }}
+            </h5>
+        </strong>
 
-        <tr>
-            <td> <strong> Project name: </strong> </td>
-            <td> {{a.project}} </td>
-        </tr>
+        <strong>
+            <h1 style="text-align: center">
+                {{ act.project }}
+            </h1>
+        </strong>
+    
+        <p>
+            {{ act.content }}
+        </p>
+    </div>
+    
+    <br>
+    
+    <div *ngIf="actParticipants">
 
-        <tr> 
-            <td> <strong> Location: </strong> </td>
-            <td> {{a.location}} </td> 
-        </tr>
+        <p-table [value]="actParticipants">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th 
+                        style="text-align: center;"
+                    > 
+                        Participants
+                    </th>
+                </tr>
+            </ng-template>
         
-        <tr>
-            <td> <strong> Content: </strong> </td>
-            <td> {{a.content}} </td> 
-        </tr>
+            <ng-template pTemplate="body" let-actPart>
+                <tr> 
+                    <td> 
+                        {{actPart.participants.name}} 
+                        {{actPart.participants.surname}}
+                    </td>
+                </tr>
+            </ng-template>
+            
+        </p-table>
+    </div>
 
-    </ng-template>
-</p-table>
+    <div *ngIf="commitments">
+
+        <p-table [value]="commitments">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th 
+                        colspan="3"
+                        style="text-align: center;"
+                    > 
+                        Commitments
+                    </th>
+                </tr>
+                <tr>
+                    <th> Person </th>
+                    <th> Title </th>
+                    <th> Description </th>
+                </tr>
+            </ng-template>
+        
+            <ng-template pTemplate="body" let-commit>
+                <tr> 
+                    <td> 
+                        {{commit.participant.name}} 
+                        {{commit.participant.surname}}
+                    </td> 
+                    <td> {{commit.title}} </td> 
+                    <td> {{commit.description}} </td>
+                </tr>
+        
+            </ng-template>
+        </p-table>
+    </div>
+</div>
