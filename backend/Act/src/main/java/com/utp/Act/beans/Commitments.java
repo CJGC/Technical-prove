@@ -1,6 +1,7 @@
 package com.utp.Act.beans;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class Commitments implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer commitmentId;
     private String title;
+    @Column(length=2048)
     private String description;
     @ManyToOne
     private Act act;
