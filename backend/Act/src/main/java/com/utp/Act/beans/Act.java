@@ -1,5 +1,6 @@
 package com.utp.Act.beans;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -11,22 +12,37 @@ import javax.persistence.Temporal;
 
 @Entity
 public class Act implements Serializable {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty(value = "actId")
+    @Column(name = "actId")
     private Integer actId;
+    
+    @JsonProperty(value = "location")
+    @Column(name = "location")
     private String location;
+    
+    @JsonProperty(value = "project")
+    @Column(name = "project")
     private String project;
-    @Column(length=2048)
+    
+    @JsonProperty(value = "content")
+    @Column(name = "content", length = 2048)
     private String content;
+    
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @JsonProperty(value = "date")
+    @Column(name = "actDate")
     Date actDate;
+    
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @JsonProperty(value = "nextMeetingDate")
+    @Column(name = "nextMeetingDate")
     Date nextMeetingDate;
 
-    public Act(Integer actId, String project, String content, Date date, 
-            Date nextMeetingDate) 
-    {
+    public Act(Integer actId, String project, String content, Date date,
+            Date nextMeetingDate) {
         this.actId = actId;
         this.project = project;
         this.content = content;
@@ -34,8 +50,9 @@ public class Act implements Serializable {
         this.nextMeetingDate = nextMeetingDate;
     }
 
-    public Act() {}
-    
+    public Act() {
+    }
+
     public Integer getActId() {
         return actId;
     }
@@ -51,7 +68,7 @@ public class Act implements Serializable {
     public void setLocation(String location) {
         this.location = location;
     }
-    
+
     public String getProject() {
         return project;
     }
@@ -83,5 +100,5 @@ public class Act implements Serializable {
     public void setNextMeetingDate(Date nextMeetingDate) {
         this.nextMeetingDate = nextMeetingDate;
     }
-    
+
 }

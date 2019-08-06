@@ -1,6 +1,8 @@
 package com.utp.Act.beans;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
@@ -39,28 +41,34 @@ public class ActParticipants implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer actParticipant_id;
+    @JsonProperty(value = "actParticipantId")
+    @Column(name = "actParticipantId")
+    private Integer actParticipantId;
+    
     @ManyToOne
+    @JsonProperty(value = "act")
     private Act act;
+    
     @ManyToOne
+    @JsonProperty(value = "participants")
     private Participants participants;
 
-    public ActParticipants() { }
+    public ActParticipants() {
+    }
 
-    public ActParticipants(Integer actParticipant_id, Act act, 
-            Participants participants_id) 
-    {
-        this.actParticipant_id = actParticipant_id;
+    public ActParticipants(Integer actParticipantId, Act act, 
+            Participants participants) {
+        this.actParticipantId = actParticipantId;
         this.act = act;
-        this.participants = participants_id;
+        this.participants = participants;
     }
 
-    public Integer getActParticipant_id() {
-        return actParticipant_id;
+    public Integer getActParticipantId() {
+        return actParticipantId;
     }
 
-    public void setActParticipant_id(Integer actParticipant_id) {
-        this.actParticipant_id = actParticipant_id;
+    public void setActParticipantId(Integer actParticipantId) {
+        this.actParticipantId = actParticipantId;
     }
     
     public Act getAct() {

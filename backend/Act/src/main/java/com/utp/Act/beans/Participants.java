@@ -1,6 +1,8 @@
 package com.utp.Act.beans;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,15 +10,26 @@ import javax.persistence.Id;
 
 @Entity
 public class Participants implements Serializable {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty(value = "participantId")
+    @Column(name = "participantId")
     private Integer participantId;
+
+    @JsonProperty(value = "name")
+    @Column(name = "name")
     private String name;
+
+    @JsonProperty(value = "surname")
+    @Column(name = "surname")
     private String surname;
+
+    @JsonProperty(value = "email")
+    @Column(name = "email")
     private String email;
 
-    public Participants(Integer participantId, String name, String surname, 
+    public Participants(Integer participantId, String name, String surname,
             String email) {
         this.participantId = participantId;
         this.name = name;
@@ -24,8 +37,9 @@ public class Participants implements Serializable {
         this.email = email;
     }
 
-    public Participants() { }
-    
+    public Participants() {
+    }
+
     public Integer getParticipant_id() {
         return participantId;
     }
@@ -57,5 +71,5 @@ public class Participants implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
 }

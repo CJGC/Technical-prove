@@ -14,14 +14,24 @@ public class Commitments implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonProperty(value = "commitment_id")
+    @JsonProperty(value = "commitmentId")
+    @Column(name = "commitmentId")
     private Integer commitmentId;
+    
+    @JsonProperty(value = "title")
+    @Column(name = "title")
     private String title;
-    @Column(length=2048)
+    
+    @JsonProperty(value = "description")
+    @Column(name = "description", length=2048)
     private String description;
+    
     @ManyToOne
+    @JsonProperty(value = "act")
     private Act act;
+    
     @ManyToOne
+    @JsonProperty(value = "participant")
     private Participants participant;
 
     public Commitments() {
