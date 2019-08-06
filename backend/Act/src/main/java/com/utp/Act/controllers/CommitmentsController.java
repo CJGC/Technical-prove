@@ -16,50 +16,44 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class CommitmentsController {
-    
+
     @Autowired
     private CommitmentsService commitmentsService;
-    
-    @GetMapping(value="/allcommitments")
-    public List<Commitments> getAllAct()
-    {
+
+    @GetMapping(value = "/allcommitments")
+    public List<Commitments> getAllAct() {
         return commitmentsService.getAllCommitments();
     }
-    
-    @GetMapping(value="/getcommitment/{id}")
-    public Commitments getCommitment(@PathVariable Integer id)
-    {
+
+    @GetMapping(value = "/getcommitment/{id}")
+    public Commitments getCommitment(@PathVariable Integer id) {
         return commitmentsService.getCommitment(id);
     }
-    
-    @PostMapping(value="/addcommitment")
-    public void addCommitment(@RequestBody Commitments commitment)
-    {
+
+    @PostMapping(value = "/addcommitment")
+    public void addCommitment(@RequestBody Commitments commitment) {
         commitmentsService.addCommitment(commitment);
     }
-    
-    @PutMapping(value="/updcommitment")
-    public void updateCommitment(@RequestBody Commitments commitment)
-    {
+
+    @PutMapping(value = "/updcommitment")
+    public void updateCommitment(@RequestBody Commitments commitment) {
         commitmentsService.updateCommitment(commitment);
     }
-    
-    @DeleteMapping(value="/delcommitment/{id}")
-    public void deleteCommitment(@PathVariable Integer id)
-    {
+
+    @DeleteMapping(value = "/delcommitment/{id}")
+    public void deleteCommitment(@PathVariable Integer id) {
         commitmentsService.deleteCommitment(id);
     }
-    
-    @GetMapping(value="getpartcommitments/{participant_id}")
+
+    @GetMapping(value = "getpartcommitments/{participant_id}")
     public List<Commitments> getCommitmentsByPartcicipant(
-            @PathVariable Integer participant_id)            
-    {
+            @PathVariable Integer participant_id) {
         return commitmentsService.getCommitmentsByPartcicipant(participant_id);
     }
-    
-    @GetMapping(value="getcommitmentsbyactandpart/{act_id}/{participant_id}")
+
+    @GetMapping(value = "getcommitmentsbyactandpart/{act_id}/{participant_id}")
     public List<Commitments> getCommitmentByActAndParticipantID(
-        @PathVariable Integer act_id, @PathVariable Integer participant_id)
+            @PathVariable Integer act_id, @PathVariable Integer participant_id) 
     {
         return commitmentsService.getCommitmentByActAndParticipantID(
                 act_id, participant_id);

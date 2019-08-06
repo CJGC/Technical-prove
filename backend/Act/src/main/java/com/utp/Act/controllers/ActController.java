@@ -20,28 +20,28 @@ public class ActController {
     @Autowired
     private ActService actService;
 
-    @GetMapping(value="/allact")
+    @GetMapping(value = "/allact")
     public List<Act> getAllAct() {
         return actService.getAllAct();
     }
 
-    @GetMapping(value="/getact/{id}")
+    @GetMapping(value = "/getact/{id}")
     public Act getAct(@PathVariable Integer id) {
         return actService.getAct(id);
     }
 
-    @PostMapping(value="/addact")
+    @PostMapping(value = "/addact")
     public void addAct(@RequestBody Act act) {
         actService.addAct(act);
     }
 
-    @PutMapping(value="/updact")
+    @PutMapping(value = "/updact")
     public void updateAct(@RequestBody Act act) {
         actService.updateAct(act);
     }
 
-    @DeleteMapping(value="/delact/{id}")
-    public void deleteAct(@PathVariable Integer id  ) {
+    @DeleteMapping(value = "/delact/{id}")
+    public void deleteAct(@PathVariable Integer id) {
         actService.deleteAct(id);
     }
 }

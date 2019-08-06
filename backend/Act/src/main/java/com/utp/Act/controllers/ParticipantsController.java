@@ -16,37 +16,32 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class ParticipantsController {
-    
+
     @Autowired
     private ParticipantsService participantsService;
-    
-    @GetMapping(value="/allparticipants")
-    public List<Participants> getAllParticipants()
-    {
+
+    @GetMapping(value = "/allparticipants")
+    public List<Participants> getAllParticipants() {
         return participantsService.getAllParticipants();
     }
-    
-    @GetMapping(value="/getparticipant/{id}")
-    public Participants getParticipant(@PathVariable Integer id)
-    {
+
+    @GetMapping(value = "/getparticipant/{id}")
+    public Participants getParticipant(@PathVariable Integer id) {
         return participantsService.getParticipant(id);
     }
-    
-    @PostMapping(value="/addparticipant")
-    public void addParticipant(@RequestBody Participants participant)
-    {
+
+    @PostMapping(value = "/addparticipant")
+    public void addParticipant(@RequestBody Participants participant) {
         participantsService.addParticipant(participant);
     }
-    
-    @PutMapping(value="/updparticipant")
-    public void updateParticipant(@RequestBody Participants participant)
-    {
+
+    @PutMapping(value = "/updparticipant")
+    public void updateParticipant(@RequestBody Participants participant) {
         participantsService.updateParticipant(participant);
     }
-    
-    @DeleteMapping(value="/delparticipant/{id}")
-    public void deleteParticipant(@PathVariable Integer id)
-    {
+
+    @DeleteMapping(value = "/delparticipant/{id}")
+    public void deleteParticipant(@PathVariable Integer id) {
         participantsService.deleteParticipant(id);
     }
 }
