@@ -1,5 +1,6 @@
 package com.utp.Act.beans;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ public class Commitments implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty(value = "commitment_id")
     private Integer commitmentId;
     private String title;
     @Column(length=2048)
