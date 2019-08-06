@@ -19,7 +19,6 @@ import { ActParticipantsComponent } from './components/actParticipants/act-parti
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GetParticipantsFromActaComponent } from './components/commitment/get-participants-from-acta.component';
 import { CreateCommitmentComponent } from './components/commitment/commitment.create.component';
-import { GeneralProvider } from './providers/general.provider';
 import { ParticipantCommitmentsComponent } from './components/commitment/participant-commitments.component';
 import { CommitmentShowComponent } from './components/commitment/commitment-show.component';
 import { CommitmentEditComponent } from './components/commitment/component-edit.component';
@@ -87,10 +86,7 @@ import { MessageService } from 'primeng/api';
     CommitmentEditComponent,
     CommitmentDeleteComponent
   ],
-  providers: [
-    MessageService,
-    GeneralProvider
-  ],
+  providers: [ MessageService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
