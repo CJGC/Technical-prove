@@ -1,15 +1,13 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommitmentService } from 'src/app/services/commitment.service';
-import { GeneralProvider } from 'src/app/providers/general.provider';
-import { Participant } from 'src/app/models/participant';
 import { DynamicDialogConfig, DynamicDialogRef, MessageService } from 'primeng/api';
 import { Commitment } from 'src/app/models/commitment';
 
 @Component({
     selector : 'act-del',
     templateUrl : '../../views/commitment/commitment-delete.html',
-    providers : [CommitmentService]
+    providers : [ CommitmentService ]
 })
 export class CommitmentDeleteComponent {
 
@@ -21,18 +19,17 @@ export class CommitmentDeleteComponent {
         private messageService : MessageService,
         private commitmentService : CommitmentService,
         private activatedRoute : ActivatedRoute,
-        private _router : Router,
-        private generalProvider : GeneralProvider
-    ) 
+        private _router : Router
+    )
     { 
         this.commitment = <Commitment> this.dynamicDialogConf.data.commitment;
     }
 
     public delCommitment() : void {
         
-        this.commitmentService.delCommitment(this.commitment.commitment_id).
+        this.commitmentService.delCommitment(this.commitment.commitmentId).
         subscribe(
-            resp => {
+            res => {
                 this.dynamicDialogRef.close(this.commitment);
                 this.messageService.add({
                     severity : 'success',
@@ -44,7 +41,7 @@ export class CommitmentDeleteComponent {
         );
     }
 
-    public cancel() {
+    public cancel() : void {
         this.dynamicDialogRef.close(this.commitment);
         this.messageService.add({
             severity : 'info',

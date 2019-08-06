@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'participant-list', component: ParticipantListComponent},
   {path: 'participant-show/:id', component : ParticipantShowComponent },
 
-  {path: 'actparticipants', component : ActParticipantsComponent},
+  {path: 'actparticipants/:act_id', component : ActParticipantsComponent},
   
   {path: 'partfromact/:act_id', component : GetParticipantsFromActaComponent},
 

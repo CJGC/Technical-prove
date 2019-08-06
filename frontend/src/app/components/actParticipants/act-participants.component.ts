@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { actParticipantsService } from 'src/app/services/act-participants.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ActParticipants } from 'src/app/models/act-participants';
 import { Act } from 'src/app/models/act';
-import { GeneralProvider } from 'src/app/providers/general.provider';
+import { ActService } from 'src/app/services/act.service';
 
 @Component({
     selector : 'act-participants',
     templateUrl : '../../views/actParticipants/act-participants.html',
-    providers : [actParticipantsService]
+    providers : [actParticipantsService, ActService]
 })
 export class ActParticipantsComponent {
 
@@ -20,7 +20,8 @@ export class ActParticipantsComponent {
 
     constructor(
         private actParticipantsService : actParticipantsService,
-        private generalProvider : GeneralProvider,
+        private actService : ActService,
+        private activatedRoute : ActivatedRoute,
         private _router : Router
     ) {
         this.source = Array<ActParticipants>();
@@ -28,11 +29,27 @@ export class ActParticipantsComponent {
         this.oldTarget = Array<ActParticipants>();
 
         // getting act
-        this.act = <Act> this.generalProvider.getData().pop();
-        this.title = "PROJECT'S ACT: " + this.act.project;
+        let actId : number; 
+        this.activatedRoute.paramMap.subscribe(param => {
+            actId = + param.get('act_id');
 
+            this.actService.getAct(actId).subscribe(
+                res => this.act =  res,
+                error => console.log("Error getting Act: ", error),
+                () => {
+                    this.title = "PROJECT ACT: " + this.act.project;
+                    this.getAvailableParticipants();
+                    this.getActParticipants();
+                }
+            );}
+        );
+
+    }
+
+    public getAvailableParticipants() : void {
         // getting availables participants
-        this.actParticipantsService.getAvailPartFromActPartiByActId(this.act.actId).
+        this.actParticipantsService.getAvailPartFromActPartiByActId(
+            this.act.actId).
             subscribe(
                 availPart => {
                     availPart.forEach( actPart => actPart.act = this.act)
@@ -42,19 +59,22 @@ export class ActParticipantsComponent {
                     "Error getting availables participants: ", error
                 )
             );
-        
-        // getting act's participants
+    }
+
+    public getActParticipants() : void {
+        // getting act participants
         this.actParticipantsService.getActParticipantsByActId(this.act.actId).
             subscribe(
                 actParticipants => this.target = actParticipants,
                 error => console.log(
                     "Error getting act's participants: ", error
                 ), // saving old target
-                () => this.target.forEach( actPart => this.oldTarget.push(actPart))
+                () => this.target.forEach( actPart => 
+                    this.oldTarget.push(actPart))
             );
     }
 
-    public submit () : void {        
+    public submit () : void {
         let existingParticipants = Array<ActParticipants>();
         let deletedParticipants = Array<ActParticipants>();
         let newParticipants = Array<ActParticipants>();
@@ -84,6 +104,6 @@ export class ActParticipantsComponent {
                 addActParticipants(newParticipants);
 
         // redirecting to the act list page
-        this._router.navigate(["/act-list"]);
+        this._router.navigate(["act-list"]);
     }
 }

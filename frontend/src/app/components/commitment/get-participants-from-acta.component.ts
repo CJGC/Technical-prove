@@ -43,7 +43,7 @@ export class GetParticipantsFromActaComponent {
         });
     }
 
-    public getParticipants() {
+    public getParticipants() : void {
         this.subtitle = "PROJECT'S ACT: " + this.act.project;
         this.actParticipantsService.getActParticipantsByActId(this.act.actId).
         subscribe (
@@ -54,7 +54,7 @@ export class GetParticipantsFromActaComponent {
         );
     }
 
-    public openDialog(part : Participant) {
+    public openDialog(part : Participant) : void {
 
         let dialog = this.dialogService.open(
             CreateCommitmentComponent,

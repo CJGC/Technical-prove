@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ParticipantService } from 'src/app/services/participant.service';
 import { Participant } from 'src/app/models/participant';
-import { GeneralProvider } from 'src/app/providers/general.provider';
 import { Router } from '@angular/router';
 import { DialogService, MessageService } from 'primeng/api';
 import { ParticipantCreateComponent } from './participant-create.component';
@@ -19,7 +18,6 @@ export class ParticipantListComponent {
 
     constructor (
         private _route : Router,
-        private generalProvider : GeneralProvider,
         private participantService : ParticipantService,
         private dialogService : DialogService,
         private messageService : MessageService
@@ -35,15 +33,6 @@ export class ParticipantListComponent {
             part => this.participantList = part,
             error => console.log(error)
         );
-    }
-
-    public saveDataIntoGeneralProvider(
-        url : string, 
-        participant : Participant) 
-    {
-        this.generalProvider.clearData();
-        this.generalProvider.setData([participant]);
-        this._route.navigate([url]);
     }
 
     public openDialog(part : Participant, tc : string) {

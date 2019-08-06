@@ -10,7 +10,6 @@ import { Participant } from 'src/app/models/participant';
 })
 export class ParticipantDeleteComponent {
 
-
     constructor (
         private dynamicDialogRef : DynamicDialogRef,
         private dynamicDialogConf : DynamicDialogConfig,
@@ -22,7 +21,7 @@ export class ParticipantDeleteComponent {
     public delParticipant() : void {
         let participant : Participant = this.dynamicDialogConf.data.part;
 
-        this.participantService.delParticipant(participant.participant_id).
+        this.participantService.delParticipant(participant.participantId).
         subscribe(
             response => {
                 this.dynamicDialogRef.close(participant);

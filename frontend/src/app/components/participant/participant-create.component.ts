@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ParticipantService } from 'src/app/services/participant.service';
 import { Participant } from 'src/app/models/participant';
-import { DynamicDialogRef, DynamicDialogConfig, MessageService } from 'primeng/api';
+import { DynamicDialogRef, MessageService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component ({
     selector : 'participant-create',
@@ -32,7 +31,7 @@ export class ParticipantCreateComponent {
         });
     }
 
-    public createPart() {
+    public createPart() : void {
         let participant : Participant = <Participant> this.partForm.value;
 
         this.participantService.creatParticipant(participant).
@@ -49,7 +48,7 @@ export class ParticipantCreateComponent {
         );
     }
 
-    public cancel() {
+    public cancel() : void {
         this.dynamicDialogRef.close();
         this.messageService.add({
             severity : 'info',
@@ -59,15 +58,15 @@ export class ParticipantCreateComponent {
     }
 
     /* Validators messages */
-    public name() {
+    public name() : any {
         return this.partForm.get('name');
     }
 
-    public surname() {
+    public surname() : any {
         return this.partForm.get('surname');
     }
 
-    public email() {
+    public email() : any {
         return this.partForm.get('email');
     }
 }

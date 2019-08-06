@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { CommitmentService } from 'src/app/services/commitment.service';
-import { GeneralProvider } from 'src/app/providers/general.provider';
 import { Commitment } from 'src/app/models/commitment';
-import { Participant } from 'src/app/models/participant';
-import { Router } from '@angular/router';
 import { DynamicDialogRef, DynamicDialogConfig, MessageService } from 'primeng/api';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Act } from 'src/app/models/act';
 
 @Component({
     selector : 'commit-edit',
@@ -28,7 +24,7 @@ export class CommitmentEditComponent {
     {
         let commitment = <Commitment> this.dynamicDialogConf.data.commitment;
         this.commitForm = this.formBuilder.group({
-            commitment_id : [commitment.commitment_id, []],
+            commitmentId : [commitment.commitmentId, []],
             title : [commitment.title, [Validators.required]],
             description : [commitment.description, [Validators.required]],
             act : [commitment.act, []],

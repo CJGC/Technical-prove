@@ -83,8 +83,7 @@
                     pButton
                     type="button"
                     label="Add participants"
-                    (click)="saveDataIntoGeneralProvider(
-                        '../actparticipants', act)"
+                    [routerLink]="['../actparticipants', act.actId]"
                     style="margin-top: 1%"
                     class="ui-button-success"
                 >

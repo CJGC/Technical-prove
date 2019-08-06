@@ -46,7 +46,7 @@ export class ParticipantCommitmentsComponent {
     public getCommitments (): void {
         this.title = this.participant.name + "'s commitments";
         this.commitmentService.getCommitmentsByActAndPartId(this.act_id,
-            this.participant.participant_id).
+            this.participant.participantId).
             subscribe(
                 partCommit => this.commitments = partCommit, 
                 error => console.log("Error getting part commitments: ", error)

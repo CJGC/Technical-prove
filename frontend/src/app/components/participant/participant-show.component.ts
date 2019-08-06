@@ -21,7 +21,7 @@ export class ParticipantShowComponent {
         this.getParticipants();
     }
 
-    public getParticipants() {
+    public getParticipants() : void {
         this.activatedRouter.paramMap.subscribe ( param => {
             const part_id = +param.get("id");
             if (part_id == null) {

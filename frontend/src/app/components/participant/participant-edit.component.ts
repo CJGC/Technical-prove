@@ -30,7 +30,7 @@ export class ParticipantEditComponent {
 
         // defining formulary default data and validations rules
         this.partForm = this.formBuilder.group({
-            participant_id : [this.participant.participant_id, []],
+            participant_id : [this.participant.participantId, []],
             name : [this.participant.name, [Validators.required]],
             surname : [this.participant.surname, [Validators.required]],
             email : [this.participant.email, [Validators.required, 
@@ -63,15 +63,15 @@ export class ParticipantEditComponent {
     }
 
     /* Validators messages */
-    public name() {
+    public name() : any {
         return this.partForm.get('name');
     }
 
-    public surname() {
+    public surname() : any {
         return this.partForm.get('surname');
     }
 
-    public email() {
+    public email() : any {
         return this.partForm.get('email');
     }
 }

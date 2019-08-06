@@ -27,6 +27,7 @@ export class CommitmentShowComponent {
                 console.log("Incorrect argument name");
                 return;
             }
+            
             this.commitmentService.getCommitment(commit_id).subscribe (
                 res => this.commitment.push(res),
                 error => console.log("Error getting act: ", error),
@@ -36,7 +37,7 @@ export class CommitmentShowComponent {
     }
 
     public loadExtraInfo() : void {
-        this.participant_id = this.commitment[0].participant.participant_id;
+        this.participant_id = this.commitment[0].participant.participantId;
         this.actId = this.commitment[0].act.actId;
         this.title = "Show " + this.commitment[0].participant.name + " " +
             this.commitment[0].participant.surname + "'s commitment";
