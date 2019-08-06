@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActService } from 'src/app/services/act.service';
 import { Act } from 'src/app/models/act';
-import { GeneralProvider } from 'src/app/providers/general.provider';
 import { Router } from '@angular/router';
 import { DialogService, MessageService } from 'primeng/api';
 import { CreateActComponent } from './act-create.component';
@@ -20,7 +19,6 @@ export class ActListComponent {
 
     constructor (
         private actService : ActService,
-        private generalProvider : GeneralProvider,
         private dialogService : DialogService,
         private _router : Router
     )
@@ -29,7 +27,7 @@ export class ActListComponent {
         this.getAct();
     }
 
-    public getAct() {
+    public getAct() : void {
         this.actService.getActList().
         subscribe(
             actArray => this.actList = actArray,
@@ -37,7 +35,7 @@ export class ActListComponent {
         );
     }
 
-    public openDialog(act : Act, tc : string) {
+    public openDialog(act : Act, tc : string) : void {
         let targetComponent : any;
         if (tc == "create")
             targetComponent = CreateActComponent;
@@ -61,15 +59,7 @@ export class ActListComponent {
         );
     }
 
-    public saveDataIntoGeneralProvider(url : string, act : Act) 
-        : void 
-    {
-        this.generalProvider.clearData();
-        this.generalProvider.setData([act]);
-        this._router.navigate([url]);
-    }
-
-    public loadData(event) {
+    public loadData(event) : void {
         console.log(event.first);
         console.log(event.rows);
     }

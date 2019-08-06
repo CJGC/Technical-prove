@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ActService } from 'src/app/services/act.service';
-import { DynamicDialogRef, DynamicDialogConfig, MessageService, DialogService } from 'primeng/api';
+import { DynamicDialogRef, DynamicDialogConfig, MessageService } from 'primeng/api';
 import { Act } from 'src/app/models/act';
 
 @Component({
@@ -35,7 +35,7 @@ export class ActDeleteComponent {
         );
     }
 
-    public cancel() {
+    public cancel() : void {
         this.dynamicDialogRef.close();
         this.messageService.add({
             severity : 'info',

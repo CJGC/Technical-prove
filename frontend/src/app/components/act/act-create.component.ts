@@ -37,7 +37,7 @@ export class CreateActComponent implements OnInit {
     });
   }
 
-  public createAct() {
+  public createAct() : void {
     let act = <Act> this.actForm.value;
     
     this.actService.creatAct(act).subscribe(
@@ -53,7 +53,7 @@ export class CreateActComponent implements OnInit {
     );
   }
 
-  public cancel() {
+  public cancel() : void {
     this.dynamicDialogRef.close();
     this.messageService.add({
       severity : 'info',

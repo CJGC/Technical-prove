@@ -6,8 +6,8 @@ import { actParticipantsService } from 'src/app/services/act-participants.servic
 import { CommitmentService } from 'src/app/services/commitment.service';
 import { ActParticipants } from 'src/app/models/act-participants';
 import { Commitment } from 'src/app/models/commitment';
-import  * as jspdf from 'jspdf';
-import html2canvas from 'html2canvas';
+//import  * as jspdf from 'jspdf';
+//import html2canvas from 'html2canvas';
 
 @Component ({
     selector : 'act-show',
@@ -34,6 +34,7 @@ export class ActShowComponent implements OnInit {
     ngOnInit() {
         this.actParticipants = Array<ActParticipants>();
         this.commitments = Array<Commitment>();
+
         // --------- First getting act info ---------
         let actId : number;
         this.activatedRoute.paramMap.subscribe(
@@ -62,7 +63,7 @@ export class ActShowComponent implements OnInit {
         // --------- Third getting commitments ---------
         this.actParticipants.forEach( actPart => {
             this.commmitmentService.getCommitmentsByActAndPartId(
-                this.act.actId, actPart.participants.participant_id).
+                this.act.actId, actPart.participants.participantId).
                 subscribe(
                     res => res.forEach( ele => this.commitments.push(ele)),
                     error => console.log("Error getting commitments", error)
