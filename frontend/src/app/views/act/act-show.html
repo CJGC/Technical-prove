@@ -1,12 +1,12 @@
-<div>
+<div id="title">
     <h3 style="text-align: center">
         {{title}}
     </h3>
+
+    <hr>
 </div>
 
-<hr>
-
-<div>
+<div id="buttons">
     <input 
         type="button"
         value="Back"
@@ -19,19 +19,21 @@
         type="button"
         value="Print act"
         class="btn btn-primary btn-bg"
-        (click)="printAct('document')"
+        (click)="printAct('actBody')"
     />
-    
+
+    <hr>
 </div>
 
-<div id="document"> 
+<div id="actBody"> 
 
     <div *ngIf="act">
 
         <strong>
-            <h5 style="text-align: left"> 
-                {{ act.date }} - {{ act.location }}
-            </h5>
+            <h3 style="text-align: left"> 
+                {{ act.date | date: 'dd/MM/yyyy'}} - 
+                {{ act.location }}
+            </h3>
         </strong>
 
         <strong>
@@ -84,7 +86,7 @@
                         Commitments
                     </th>
                 </tr>
-                <tr>
+                <tr style="text-align: center">
                     <th> Person </th>
                     <th> Title </th>
                     <th> Description </th>
