@@ -9,44 +9,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ActParticipantsService 
-{
+public class ActParticipantsService {
+
     @Autowired
     private ActParticipantsRepository actParticipantsRepository;
-    
-    public List<ActParticipants> getActParticipantsByActId(Integer act_id)
-    {
+
+    public List<ActParticipants> getActParticipantsByActId(Integer act_id) {
         return actParticipantsRepository.findByActActId(act_id);
     }
-    
-    public void addActParticipants(List<ActParticipants> actParticipant)
-    {
+
+    public void addActParticipants(List<ActParticipants> actParticipant) {
         actParticipantsRepository.saveAll(actParticipant);
     }
-    
-    public void deleteActParticipants(List<ActParticipants> actParticipant)
-    {
+
+    public void deleteActParticipants(List<ActParticipants> actParticipant) {
         actParticipantsRepository.deleteAll(actParticipant);
     }
-    
+
     public List<ActParticipants> getAvailPartFromActPartiByActId(Integer act_id) 
     {
-       List<Participants> participants =
-        this.actParticipantsRepository.
-            fetchActParticipantsDataRightJoin(act_id);
-       
-       List<ActParticipants> tempActParticipants = new ArrayList<>();
-       for(int i=0; i < participants.size(); i++)
-       {
-           ActParticipants actParticipant = new ActParticipants (
-                0,
-                null,
-                participants.get(i)
-           );
-           
-           tempActParticipants.add(actParticipant);
-       }
-       
-       return tempActParticipants;
+        List<Participants> participants
+                = this.actParticipantsRepository.
+                        fetchActParticipantsDataRightJoin(act_id);
+
+        List<ActParticipants> tempActParticipants = new ArrayList<>();
+        for (int i = 0; i < participants.size(); i++) {
+            ActParticipants actParticipant = new ActParticipants(
+                    0,
+                    null,
+                    participants.get(i)
+            );
+
+            tempActParticipants.add(actParticipant);
+        }
+
+        return tempActParticipants;
     }
 }

@@ -9,35 +9,30 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ActService {
-    
+
     @Autowired
     private ActRepository actRepository;
-    
-    public List<Act> getAllAct()
-    {
+
+    public List<Act> getAllAct() {
         List<Act> act = new ArrayList<>();
         actRepository.findAll().
-        forEach(act::add);
+                forEach(act::add);
         return act;
     }
-    
-    public Act getAct(Integer act_id)
-    {
+
+    public Act getAct(Integer act_id) {
         return actRepository.findById(act_id).get();
     }
-    
-    public void addAct(Act act)
-    {
+
+    public void addAct(Act act) {
         actRepository.save(act);
     }
-    
-    public void updateAct(Act act)
-    {
+
+    public void updateAct(Act act) {
         actRepository.save(act);
     }
-    
-    public void deleteAct(Integer id)
-    {
+
+    public void deleteAct(Integer id) {
         actRepository.deleteById(id);
     }
 }
