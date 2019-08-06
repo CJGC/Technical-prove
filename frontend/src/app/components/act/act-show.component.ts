@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Act } from 'src/app/models/act';
 import { ActivatedRoute } from '@angular/router';
 import { ActService } from 'src/app/services/act.service';
@@ -6,10 +6,13 @@ import { actParticipantsService } from 'src/app/services/act-participants.servic
 import { CommitmentService } from 'src/app/services/commitment.service';
 import { ActParticipants } from 'src/app/models/act-participants';
 import { Commitment } from 'src/app/models/commitment';
+import  * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component ({
     selector : 'act-show',
     templateUrl : '../../views/act/act-show.html',
+    styleUrls : ['../../views/act/css/act-show.css'],
     providers : [ActService, actParticipantsService, CommitmentService]
 })
 export class ActShowComponent implements OnInit {
@@ -17,7 +20,7 @@ export class ActShowComponent implements OnInit {
     public act : Act;
     public actParticipants : Array<ActParticipants>;
     public commitments : Array<Commitment>;
-
+    
     constructor (
         private activatedRoute : ActivatedRoute,
         private actService : ActService,
@@ -68,11 +71,35 @@ export class ActShowComponent implements OnInit {
     }
 
     public printAct(id : string) : void {
+        window.print();
+        
+        /* ------ printing document by image ------ */
+        
+        /*
+        const source = document.getElementById(id);
+        html2canvas(source).then(canvas => {
+            let imgWidth = 208
+            let imgHeight = canvas.height * imgWidth / canvas.width;
+
+            const img = canvas.toDataURL('image/png');
+            const doc = new jspdf('p', 'mm', 'a4');
+            doc.addImage(img, 'JPEG', 0, 0, imgWidth, imgHeight);
+        
+            doc.autoPrint();
+            doc.output("dataurlnewwindow");
+        });*/
+        
+
+        /* ------ building printing frame ------*/
+        /*
         let generator = window.open(",'name,'");
         let layetext = document.getElementById(id);
         generator.document.write(layetext.innerHTML);
         generator.document.close();
         generator.print();
         generator.close();
+        */
+        
     }
+
 }
